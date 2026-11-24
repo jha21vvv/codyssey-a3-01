@@ -1,0 +1,277 @@
+{
+  "config": {
+    "blur_kernel": 5,
+    "canny_low": 50,
+    "canny_high": 150,
+    "morph_kernel": 0,
+    "min_area_ratio": 0.05,
+    "max_area_ratio": 0.98,
+    "approx_epsilon_ratio": 0.02,
+    "adaptive_block_size": 15,
+    "adaptive_c": 8,
+    "use_clahe": false,
+    "require_convex": true
+  },
+  "criteria": {
+    "iou_threshold": 0.75,
+    "max_corner_error_px": 45.0
+  },
+  "overall": {
+    "total": 20,
+    "success": 9,
+    "fail": 11,
+    "success_rate": 45.0
+  },
+  "by_condition": [
+    {
+      "condition": "단순 배경 + 정면",
+      "total": 5,
+      "success": 5,
+      "fail": 0,
+      "success_rate": 100.0
+    },
+    {
+      "condition": "그림자 있음",
+      "total": 5,
+      "success": 2,
+      "fail": 3,
+      "success_rate": 40.0
+    },
+    {
+      "condition": "45도 이상 기울어짐",
+      "total": 5,
+      "success": 2,
+      "fail": 3,
+      "success_rate": 40.0
+    },
+    {
+      "condition": "복잡한 배경",
+      "total": 5,
+      "success": 0,
+      "fail": 5,
+      "success_rate": 0.0
+    }
+  ],
+  "records": [
+    {
+      "image_id": "easy_01",
+      "filename": "easy_01.jpg",
+      "condition": "단순 배경 + 정면",
+      "detected": true,
+      "success": true,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.4104,
+      "failure_reason": null
+    },
+    {
+      "image_id": "easy_02",
+      "filename": "easy_02.jpg",
+      "condition": "단순 배경 + 정면",
+      "detected": true,
+      "success": true,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.3196,
+      "failure_reason": null
+    },
+    {
+      "image_id": "easy_03",
+      "filename": "easy_03.jpg",
+      "condition": "단순 배경 + 정면",
+      "detected": true,
+      "success": true,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.4263,
+      "failure_reason": null
+    },
+    {
+      "image_id": "easy_04",
+      "filename": "easy_04.jpg",
+      "condition": "단순 배경 + 정면",
+      "detected": true,
+      "success": true,
+      "iou": 0.7638,
+      "corner_error_px": 35.5,
+      "area_ratio": 0.2193,
+      "failure_reason": null
+    },
+    {
+      "image_id": "easy_05",
+      "filename": "easy_05.jpg",
+      "condition": "단순 배경 + 정면",
+      "detected": true,
+      "success": true,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.3807,
+      "failure_reason": null
+    },
+    {
+      "image_id": "shadow_01",
+      "filename": "shadow_01.jpg",
+      "condition": "그림자 있음",
+      "detected": true,
+      "success": true,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.4113,
+      "failure_reason": null
+    },
+    {
+      "image_id": "shadow_02",
+      "filename": "shadow_02.jpg",
+      "condition": "그림자 있음",
+      "detected": true,
+      "success": true,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.3311,
+      "failure_reason": null
+    },
+    {
+      "image_id": "shadow_03",
+      "filename": "shadow_03.jpg",
+      "condition": "그림자 있음",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0023,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "shadow_04",
+      "filename": "shadow_04.jpg",
+      "condition": "그림자 있음",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0023,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "shadow_05",
+      "filename": "shadow_05.jpg",
+      "condition": "그림자 있음",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0023,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "tilt_01",
+      "filename": "tilt_01.jpg",
+      "condition": "45도 이상 기울어짐",
+      "detected": true,
+      "success": true,
+      "iou": 0.996,
+      "corner_error_px": 1.0,
+      "area_ratio": 0.2635,
+      "failure_reason": null
+    },
+    {
+      "image_id": "tilt_02",
+      "filename": "tilt_02.jpg",
+      "condition": "45도 이상 기울어짐",
+      "detected": true,
+      "success": false,
+      "iou": 0.2045,
+      "corner_error_px": 174.99,
+      "area_ratio": 0.0718,
+      "failure_reason": "inaccurate_quad(iou=0.204, err=175.0px)"
+    },
+    {
+      "image_id": "tilt_03",
+      "filename": "tilt_03.jpg",
+      "condition": "45도 이상 기울어짐",
+      "detected": true,
+      "success": true,
+      "iou": 0.9986,
+      "corner_error_px": 0.35,
+      "area_ratio": 0.3246,
+      "failure_reason": null
+    },
+    {
+      "image_id": "tilt_04",
+      "filename": "tilt_04.jpg",
+      "condition": "45도 이상 기울어짐",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0006,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "tilt_05",
+      "filename": "tilt_05.jpg",
+      "condition": "45도 이상 기울어짐",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0011,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "complex_01",
+      "filename": "complex_01.jpg",
+      "condition": "복잡한 배경",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0458,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "complex_02",
+      "filename": "complex_02.jpg",
+      "condition": "복잡한 배경",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0212,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "complex_03",
+      "filename": "complex_03.jpg",
+      "condition": "복잡한 배경",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0021,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "complex_04",
+      "filename": "complex_04.jpg",
+      "condition": "복잡한 배경",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0366,
+      "failure_reason": "area_filter_rejected_all"
+    },
+    {
+      "image_id": "complex_05",
+      "filename": "complex_05.jpg",
+      "condition": "복잡한 배경",
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0154,
+      "failure_reason": "area_filter_rejected_all"
+    }
+  ]
+}

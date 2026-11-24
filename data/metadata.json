@@ -1,0 +1,610 @@
+{
+  "dataset_name": "codyssey-a3-01-benchmark-20",
+  "image_size": [
+    800,
+    600
+  ],
+  "total_images": 20,
+  "images": [
+    {
+      "id": "easy_01",
+      "filename": "easy_01.jpg",
+      "relative_path": "test_images/easy_01.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "document_type": "a4_report",
+      "lighting": "균일 조명 (실내 LED)",
+      "angle_deg": 2,
+      "background": "단색 어두운 매트",
+      "notes": "표준 정면 A4 검사 보고서",
+      "gt_corners": [
+        [
+          200,
+          55
+        ],
+        [
+          600,
+          58
+        ],
+        [
+          602,
+          548
+        ],
+        [
+          198,
+          545
+        ]
+      ]
+    },
+    {
+      "id": "easy_02",
+      "filename": "easy_02.jpg",
+      "relative_path": "test_images/easy_02.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "document_type": "receipt",
+      "lighting": "균일 조명 (실내 형광등)",
+      "angle_deg": 4,
+      "background": "어두운 단색 책상",
+      "notes": "마트 영수증 정면 촬영",
+      "gt_corners": [
+        [
+          245,
+          50
+        ],
+        [
+          555,
+          56
+        ],
+        [
+          560,
+          542
+        ],
+        [
+          240,
+          538
+        ]
+      ]
+    },
+    {
+      "id": "easy_03",
+      "filename": "easy_03.jpg",
+      "relative_path": "test_images/easy_03.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "document_type": "medical_form",
+      "lighting": "균일 조명",
+      "angle_deg": 6,
+      "background": "단순 회색 매트",
+      "notes": "의료 처방전 미세 기울기",
+      "gt_corners": [
+        [
+          185,
+          62
+        ],
+        [
+          605,
+          52
+        ],
+        [
+          615,
+          540
+        ],
+        [
+          195,
+          548
+        ]
+      ]
+    },
+    {
+      "id": "easy_04",
+      "filename": "easy_04.jpg",
+      "relative_path": "test_images/easy_04.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "document_type": "business_card",
+      "lighting": "균일 조명",
+      "angle_deg": 3,
+      "background": "어두운 원목 테이블",
+      "notes": "가로형 명함 정면",
+      "gt_corners": [
+        [
+          170,
+          145
+        ],
+        [
+          630,
+          152
+        ],
+        [
+          625,
+          452
+        ],
+        [
+          166,
+          445
+        ]
+      ]
+    },
+    {
+      "id": "easy_05",
+      "filename": "easy_05.jpg",
+      "relative_path": "test_images/easy_05.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "document_type": "invoice",
+      "lighting": "균일 조명",
+      "angle_deg": 7,
+      "background": "어두운 무광 패드",
+      "notes": "상업 송장 정면",
+      "gt_corners": [
+        [
+          212,
+          58
+        ],
+        [
+          595,
+          68
+        ],
+        [
+          588,
+          542
+        ],
+        [
+          202,
+          534
+        ]
+      ]
+    },
+    {
+      "id": "shadow_01",
+      "filename": "shadow_01.jpg",
+      "relative_path": "test_images/shadow_01.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "document_type": "a4_report",
+      "lighting": "부드러운 대각선 그림자 (35% 감광)",
+      "angle_deg": 5,
+      "background": "어두운 매트",
+      "notes": "연한 그림자 — 외곽선 유지 가능",
+      "gt_corners": [
+        [
+          195,
+          60
+        ],
+        [
+          605,
+          66
+        ],
+        [
+          608,
+          544
+        ],
+        [
+          192,
+          538
+        ]
+      ]
+    },
+    {
+      "id": "shadow_02",
+      "filename": "shadow_02.jpg",
+      "relative_path": "test_images/shadow_02.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "document_type": "receipt",
+      "lighting": "중간 그림자 + 약한 저조도",
+      "angle_deg": 8,
+      "background": "어두운 책상",
+      "notes": "우하단 모서리에 드리워진 그림자",
+      "gt_corners": [
+        [
+          235,
+          58
+        ],
+        [
+          562,
+          62
+        ],
+        [
+          568,
+          540
+        ],
+        [
+          230,
+          536
+        ]
+      ]
+    },
+    {
+      "id": "shadow_03",
+      "filename": "shadow_03.jpg",
+      "relative_path": "test_images/shadow_03.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "document_type": "invoice",
+      "lighting": "강한 경계 그림자 (75% 감광, 날카로운 음영 경계)",
+      "angle_deg": 6,
+      "background": "어두운 매트",
+      "notes": "날카로운 그림자 경계가 가짜 엣지를 형성",
+      "gt_corners": [
+        [
+          195,
+          56
+        ],
+        [
+          600,
+          62
+        ],
+        [
+          604,
+          542
+        ],
+        [
+          190,
+          538
+        ]
+      ]
+    },
+    {
+      "id": "shadow_04",
+      "filename": "shadow_04.jpg",
+      "relative_path": "test_images/shadow_04.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "document_type": "medical_form",
+      "lighting": "심각한 저조도 + 82% 암부 그림자",
+      "angle_deg": 9,
+      "background": "어두운 매트",
+      "notes": "어두운 영역 밝기 압축으로 엣지 기울기 급감",
+      "gt_corners": [
+        [
+          200,
+          60
+        ],
+        [
+          598,
+          66
+        ],
+        [
+          602,
+          540
+        ],
+        [
+          196,
+          535
+        ]
+      ]
+    },
+    {
+      "id": "shadow_05",
+      "filename": "shadow_05.jpg",
+      "relative_path": "test_images/shadow_05.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "document_type": "a4_report",
+      "lighting": "강한 그림자 + 우상단 스포트라이트 빛 반사(Glare)",
+      "angle_deg": 10,
+      "background": "밝은 책상 + 조명 반사",
+      "notes": "빛 반사로 모서리 소실 + 그림자 엣지 간섭",
+      "gt_corners": [
+        [
+          195,
+          62
+        ],
+        [
+          602,
+          65
+        ],
+        [
+          600,
+          538
+        ],
+        [
+          192,
+          535
+        ]
+      ]
+    },
+    {
+      "id": "tilt_01",
+      "filename": "tilt_01.jpg",
+      "relative_path": "test_images/tilt_01.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "document_type": "a4_report",
+      "lighting": "균일 조명",
+      "angle_deg": 46,
+      "background": "어두운 매트",
+      "notes": "46도 마름모 회전 — 단순 sum/diff 정렬 실패 테스트 케이스",
+      "gt_corners": [
+        [
+          395,
+          58
+        ],
+        [
+          662,
+          265
+        ],
+        [
+          412,
+          542
+        ],
+        [
+          142,
+          332
+        ]
+      ]
+    },
+    {
+      "id": "tilt_02",
+      "filename": "tilt_02.jpg",
+      "relative_path": "test_images/tilt_02.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "document_type": "invoice",
+      "lighting": "균일 조명",
+      "angle_deg": 50,
+      "background": "어두운 원목",
+      "notes": "50도 원근 사다리꼴 왜곡",
+      "gt_corners": [
+        [
+          260,
+          88
+        ],
+        [
+          555,
+          118
+        ],
+        [
+          675,
+          522
+        ],
+        [
+          125,
+          488
+        ]
+      ]
+    },
+    {
+      "id": "tilt_03",
+      "filename": "tilt_03.jpg",
+      "relative_path": "test_images/tilt_03.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "document_type": "receipt",
+      "lighting": "원거리 엣지 미세 블러 + 55도 기울기",
+      "angle_deg": 55,
+      "background": "어두운 매트",
+      "notes": "원거리 초점 흐림으로 상단 엣지 약화",
+      "gt_corners": [
+        [
+          285,
+          105
+        ],
+        [
+          520,
+          128
+        ],
+        [
+          685,
+          515
+        ],
+        [
+          115,
+          492
+        ]
+      ]
+    },
+    {
+      "id": "tilt_04",
+      "filename": "tilt_04.jpg",
+      "relative_path": "test_images/tilt_04.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "document_type": "medical_form",
+      "lighting": "60도 급경사 + 원거리 음영",
+      "angle_deg": 60,
+      "background": "원목 + 측면 물체",
+      "notes": "60도 극심한 원근 축소 + 상단부 저대비",
+      "gt_corners": [
+        [
+          310,
+          138
+        ],
+        [
+          520,
+          152
+        ],
+        [
+          728,
+          525
+        ],
+        [
+          88,
+          505
+        ]
+      ]
+    },
+    {
+      "id": "tilt_05",
+      "filename": "tilt_05.jpg",
+      "relative_path": "test_images/tilt_05.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "document_type": "a4_report",
+      "lighting": "65도 극심한 기울기 + 종이 말림(곡선 왜곡)",
+      "angle_deg": 65,
+      "background": "어두운 책상",
+      "notes": "상단 가장자리 말림으로 4꼭짓점 다각형 근사 붕괴",
+      "gt_corners": [
+        [
+          318,
+          162
+        ],
+        [
+          512,
+          178
+        ],
+        [
+          742,
+          518
+        ],
+        [
+          72,
+          495
+        ]
+      ]
+    },
+    {
+      "id": "complex_01",
+      "filename": "complex_01.jpg",
+      "relative_path": "test_images/complex_01.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "document_type": "a4_report",
+      "lighting": "균일 조명",
+      "angle_deg": 5,
+      "background": "나뭇결 책상 + 양옆 소품",
+      "notes": "배경 잡동사니 존재하지만 문서 대비는 충분",
+      "gt_corners": [
+        [
+          205,
+          62
+        ],
+        [
+          595,
+          68
+        ],
+        [
+          592,
+          535
+        ],
+        [
+          200,
+          530
+        ]
+      ]
+    },
+    {
+      "id": "complex_02",
+      "filename": "complex_02.jpg",
+      "relative_path": "test_images/complex_02.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "document_type": "invoice",
+      "lighting": "균일 조명",
+      "angle_deg": 6,
+      "background": "강한 격자무늬 매트 + 볼펜",
+      "notes": "격자 패턴이 미세 엣지 노이즈를 대량 유발",
+      "gt_corners": [
+        [
+          202,
+          66
+        ],
+        [
+          592,
+          72
+        ],
+        [
+          588,
+          532
+        ],
+        [
+          198,
+          526
+        ]
+      ]
+    },
+    {
+      "id": "complex_03",
+      "filename": "complex_03.jpg",
+      "relative_path": "test_images/complex_03.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "document_type": "receipt",
+      "lighting": "밝은 베이지 배경 (종이와 유사 명도)",
+      "angle_deg": 4,
+      "background": "흰 종이와 명도 차이가 작은 베이지 책상",
+      "notes": "배경-문서 휘도차 극소화로 외곽 Canny 미검출",
+      "gt_corners": [
+        [
+          228,
+          62
+        ],
+        [
+          568,
+          66
+        ],
+        [
+          570,
+          536
+        ],
+        [
+          225,
+          532
+        ]
+      ]
+    },
+    {
+      "id": "complex_04",
+      "filename": "complex_04.jpg",
+      "relative_path": "test_images/complex_04.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "document_type": "medical_form",
+      "lighting": "구겨진 종이 주름 + 복잡한 책상 패턴",
+      "angle_deg": 8,
+      "background": "복잡한 도형/선분 난무 배경 + 종이 구겨짐",
+      "notes": "내부 구김 주름 + 배경 교차선으로 윤곽선 분절",
+      "gt_corners": [
+        [
+          206,
+          65
+        ],
+        [
+          592,
+          70
+        ],
+        [
+          588,
+          532
+        ],
+        [
+          202,
+          528
+        ]
+      ]
+    },
+    {
+      "id": "complex_05",
+      "filename": "complex_05.jpg",
+      "relative_path": "test_images/complex_05.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "document_type": "a4_report",
+      "lighting": "우하단 손가락/물체 부분 가림 + 복잡한 배경",
+      "angle_deg": 5,
+      "background": "복잡한 배경 + 모서리 부분 가림(Occlusion)",
+      "notes": "모서리 가림으로 사각형이 6각형 L자 윤곽으로 변형",
+      "gt_corners": [
+        [
+          205,
+          64
+        ],
+        [
+          594,
+          68
+        ],
+        [
+          590,
+          534
+        ],
+        [
+          200,
+          530
+        ]
+      ]
+    }
+  ]
+}

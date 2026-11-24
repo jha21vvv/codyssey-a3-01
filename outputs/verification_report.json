@@ -1,0 +1,109 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "id": "REQ-01",
+      "name": "금지 라이브러리 미사용 (Zero DL/OCR/Scipy)",
+      "passed": true,
+      "checked_files": 12,
+      "violations": []
+    },
+    {
+      "id": "REQ-02",
+      "name": "수동 4점 좌표 정렬 및 45도 동률 방어",
+      "passed": true,
+      "naive_unique_vertices": 3,
+      "ours_unique_vertices": 4
+    },
+    {
+      "id": "REQ-03",
+      "name": "자동화 Mock 단위 테스트 100% 통과",
+      "passed": true,
+      "tests_run": 20,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_sec": 0.4732
+    },
+    {
+      "id": "REQ-04",
+      "name": "20장 테스트셋 밝기 히스토그램 EDA",
+      "passed": true,
+      "total_images": 20,
+      "easy_std": 88.41,
+      "hard_std": 67.58
+    },
+    {
+      "id": "REQ-05",
+      "name": "20장 정량적 성능 평가 (4조건 × 5장)",
+      "passed": true,
+      "overall": {
+        "total": 20,
+        "success": 9,
+        "fail": 11,
+        "success_rate": 45.0
+      },
+      "by_condition": [
+        {
+          "condition": "단순 배경 + 정면",
+          "total": 5,
+          "success": 5,
+          "fail": 0,
+          "success_rate": 100.0
+        },
+        {
+          "condition": "그림자 있음",
+          "total": 5,
+          "success": 2,
+          "fail": 3,
+          "success_rate": 40.0
+        },
+        {
+          "condition": "45도 이상 기울어짐",
+          "total": 5,
+          "success": 2,
+          "fail": 3,
+          "success_rate": 40.0
+        },
+        {
+          "condition": "복잡한 배경",
+          "total": 5,
+          "success": 0,
+          "fail": 5,
+          "success_rate": 0.0
+        }
+      ]
+    },
+    {
+      "id": "REQ-06",
+      "name": "다중 프리셋 파라미터 딜레마 실증",
+      "passed": true,
+      "best_single_preset": 13,
+      "oracle_union": 15,
+      "conflict_pairs": 5
+    },
+    {
+      "id": "REQ-07",
+      "name": "단일 이미지 E2E 스캔 + 적응형 이진화",
+      "passed": true,
+      "area_ratio": 0.4104,
+      "scanned_shape": [
+        490,
+        404
+      ]
+    },
+    {
+      "id": "REQ-08",
+      "name": "Matplotlib 다이어그램 상대경로 임베딩 검증",
+      "passed": true,
+      "embedded_images": 13,
+      "absolute_path_violations": [],
+      "missing_targets": []
+    },
+    {
+      "id": "REQ-09",
+      "name": "8단계 마스터 워크플로우 필수 산출물 존재",
+      "passed": true,
+      "missing_docs": []
+    }
+  ]
+}
