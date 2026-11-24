@@ -108,7 +108,7 @@ def _check_manual_geometry_tie_break() -> Dict[str, Any]:
 def run_verification() -> Dict[str, Any]:
     """Execute all requirement checks and print a visual summary table + JSON report."""
     configure_utf8_console()
-    meta_path = PROJECT_ROOT / "data" / "metadata.json"
+    meta_path = PROJECT_ROOT / "data" / "flow_document_images" / "metadata_flow.json"
 
     checks: List[Dict[str, Any]] = []
 
@@ -156,8 +156,8 @@ def run_verification() -> Dict[str, Any]:
         }
     )
 
-    # Single scan end-to-end check on easy_01
-    sample_res = DocumentScanner().scan_file(PROJECT_ROOT / "data" / "test_images" / "easy_01.jpg")
+    # Single scan end-to-end check on easy_01 (Google Flow photorealistic set)
+    sample_res = DocumentScanner().scan_file(PROJECT_ROOT / "data" / "flow_document_images" / "easy_01.jpg")
     checks.append(
         {
             "id": "REQ-07",

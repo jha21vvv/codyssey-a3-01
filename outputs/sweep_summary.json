@@ -16,6 +16,108 @@
       },
       "overall": {
         "total": 20,
+        "success": 7,
+        "fail": 13,
+        "success_rate": 35.0
+      },
+      "by_condition": [
+        {
+          "condition": "단순 배경 + 정면",
+          "total": 5,
+          "success": 5,
+          "fail": 0,
+          "success_rate": 100.0
+        },
+        {
+          "condition": "그림자 있음",
+          "total": 5,
+          "success": 2,
+          "fail": 3,
+          "success_rate": 40.0
+        },
+        {
+          "condition": "45도 이상 기울어짐",
+          "total": 5,
+          "success": 0,
+          "fail": 5,
+          "success_rate": 0.0
+        },
+        {
+          "condition": "복잡한 배경",
+          "total": 5,
+          "success": 0,
+          "fail": 5,
+          "success_rate": 0.0
+        }
+      ]
+    },
+    "strong_denoise": {
+      "config": {
+        "blur_kernel": 9,
+        "canny_low": 80,
+        "canny_high": 200,
+        "morph_kernel": 3,
+        "min_area_ratio": 0.05,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.02,
+        "adaptive_block_size": 15,
+        "adaptive_c": 8,
+        "use_clahe": false,
+        "require_convex": true
+      },
+      "overall": {
+        "total": 20,
+        "success": 7,
+        "fail": 13,
+        "success_rate": 35.0
+      },
+      "by_condition": [
+        {
+          "condition": "단순 배경 + 정면",
+          "total": 5,
+          "success": 5,
+          "fail": 0,
+          "success_rate": 100.0
+        },
+        {
+          "condition": "그림자 있음",
+          "total": 5,
+          "success": 1,
+          "fail": 4,
+          "success_rate": 20.0
+        },
+        {
+          "condition": "45도 이상 기울어짐",
+          "total": 5,
+          "success": 1,
+          "fail": 4,
+          "success_rate": 20.0
+        },
+        {
+          "condition": "복잡한 배경",
+          "total": 5,
+          "success": 0,
+          "fail": 5,
+          "success_rate": 0.0
+        }
+      ]
+    },
+    "morph_bridge": {
+      "config": {
+        "blur_kernel": 5,
+        "canny_low": 40,
+        "canny_high": 120,
+        "morph_kernel": 5,
+        "min_area_ratio": 0.05,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.03,
+        "adaptive_block_size": 15,
+        "adaptive_c": 8,
+        "use_clahe": false,
+        "require_convex": true
+      },
+      "overall": {
+        "total": 20,
         "success": 9,
         "fail": 11,
         "success_rate": 45.0
@@ -38,6 +140,108 @@
         {
           "condition": "45도 이상 기울어짐",
           "total": 5,
+          "success": 1,
+          "fail": 4,
+          "success_rate": 20.0
+        },
+        {
+          "condition": "복잡한 배경",
+          "total": 5,
+          "success": 1,
+          "fail": 4,
+          "success_rate": 20.0
+        }
+      ]
+    },
+    "clahe_shadow_morph": {
+      "config": {
+        "blur_kernel": 7,
+        "canny_low": 70,
+        "canny_high": 180,
+        "morph_kernel": 9,
+        "min_area_ratio": 0.05,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.04,
+        "adaptive_block_size": 15,
+        "adaptive_c": 8,
+        "use_clahe": true,
+        "require_convex": true
+      },
+      "overall": {
+        "total": 20,
+        "success": 9,
+        "fail": 11,
+        "success_rate": 45.0
+      },
+      "by_condition": [
+        {
+          "condition": "단순 배경 + 정면",
+          "total": 5,
+          "success": 5,
+          "fail": 0,
+          "success_rate": 100.0
+        },
+        {
+          "condition": "그림자 있음",
+          "total": 5,
+          "success": 3,
+          "fail": 2,
+          "success_rate": 60.0
+        },
+        {
+          "condition": "45도 이상 기울어짐",
+          "total": 5,
+          "success": 1,
+          "fail": 4,
+          "success_rate": 20.0
+        },
+        {
+          "condition": "복잡한 배경",
+          "total": 5,
+          "success": 0,
+          "fail": 5,
+          "success_rate": 0.0
+        }
+      ]
+    },
+    "heavy_blur_morph": {
+      "config": {
+        "blur_kernel": 11,
+        "canny_low": 20,
+        "canny_high": 60,
+        "morph_kernel": 9,
+        "min_area_ratio": 0.05,
+        "max_area_ratio": 0.98,
+        "approx_epsilon_ratio": 0.04,
+        "adaptive_block_size": 15,
+        "adaptive_c": 8,
+        "use_clahe": false,
+        "require_convex": true
+      },
+      "overall": {
+        "total": 20,
+        "success": 8,
+        "fail": 12,
+        "success_rate": 40.0
+      },
+      "by_condition": [
+        {
+          "condition": "단순 배경 + 정면",
+          "total": 5,
+          "success": 5,
+          "fail": 0,
+          "success_rate": 100.0
+        },
+        {
+          "condition": "그림자 있음",
+          "total": 5,
+          "success": 1,
+          "fail": 4,
+          "success_rate": 20.0
+        },
+        {
+          "condition": "45도 이상 기울어짐",
+          "total": 5,
           "success": 2,
           "fail": 3,
           "success_rate": 40.0
@@ -50,430 +254,217 @@
           "success_rate": 0.0
         }
       ]
-    },
-    "sensitive_shadow": {
-      "config": {
-        "blur_kernel": 3,
-        "canny_low": 20,
-        "canny_high": 70,
-        "morph_kernel": 5,
-        "min_area_ratio": 0.05,
-        "max_area_ratio": 0.98,
-        "approx_epsilon_ratio": 0.02,
-        "adaptive_block_size": 15,
-        "adaptive_c": 8,
-        "use_clahe": true,
-        "require_convex": true
-      },
-      "overall": {
-        "total": 20,
-        "success": 6,
-        "fail": 14,
-        "success_rate": 30.0
-      },
-      "by_condition": [
-        {
-          "condition": "단순 배경 + 정면",
-          "total": 5,
-          "success": 3,
-          "fail": 2,
-          "success_rate": 60.0
-        },
-        {
-          "condition": "그림자 있음",
-          "total": 5,
-          "success": 1,
-          "fail": 4,
-          "success_rate": 20.0
-        },
-        {
-          "condition": "45도 이상 기울어짐",
-          "total": 5,
-          "success": 1,
-          "fail": 4,
-          "success_rate": 20.0
-        },
-        {
-          "condition": "복잡한 배경",
-          "total": 5,
-          "success": 1,
-          "fail": 4,
-          "success_rate": 20.0
-        }
-      ]
-    },
-    "strong_denoise": {
-      "config": {
-        "blur_kernel": 9,
-        "canny_low": 80,
-        "canny_high": 200,
-        "morph_kernel": 3,
-        "min_area_ratio": 0.05,
-        "max_area_ratio": 0.98,
-        "approx_epsilon_ratio": 0.02,
-        "adaptive_block_size": 15,
-        "adaptive_c": 8,
-        "use_clahe": false,
-        "require_convex": true
-      },
-      "overall": {
-        "total": 20,
-        "success": 13,
-        "fail": 7,
-        "success_rate": 65.0
-      },
-      "by_condition": [
-        {
-          "condition": "단순 배경 + 정면",
-          "total": 5,
-          "success": 5,
-          "fail": 0,
-          "success_rate": 100.0
-        },
-        {
-          "condition": "그림자 있음",
-          "total": 5,
-          "success": 2,
-          "fail": 3,
-          "success_rate": 40.0
-        },
-        {
-          "condition": "45도 이상 기울어짐",
-          "total": 5,
-          "success": 4,
-          "fail": 1,
-          "success_rate": 80.0
-        },
-        {
-          "condition": "복잡한 배경",
-          "total": 5,
-          "success": 2,
-          "fail": 3,
-          "success_rate": 40.0
-        }
-      ]
-    },
-    "strict_edges": {
-      "config": {
-        "blur_kernel": 7,
-        "canny_low": 100,
-        "canny_high": 220,
-        "morph_kernel": 0,
-        "min_area_ratio": 0.05,
-        "max_area_ratio": 0.98,
-        "approx_epsilon_ratio": 0.02,
-        "adaptive_block_size": 15,
-        "adaptive_c": 8,
-        "use_clahe": false,
-        "require_convex": true
-      },
-      "overall": {
-        "total": 20,
-        "success": 10,
-        "fail": 10,
-        "success_rate": 50.0
-      },
-      "by_condition": [
-        {
-          "condition": "단순 배경 + 정면",
-          "total": 5,
-          "success": 5,
-          "fail": 0,
-          "success_rate": 100.0
-        },
-        {
-          "condition": "그림자 있음",
-          "total": 5,
-          "success": 2,
-          "fail": 3,
-          "success_rate": 40.0
-        },
-        {
-          "condition": "45도 이상 기울어짐",
-          "total": 5,
-          "success": 2,
-          "fail": 3,
-          "success_rate": 40.0
-        },
-        {
-          "condition": "복잡한 배경",
-          "total": 5,
-          "success": 1,
-          "fail": 4,
-          "success_rate": 20.0
-        }
-      ]
-    },
-    "morph_bridge": {
-      "config": {
-        "blur_kernel": 5,
-        "canny_low": 40,
-        "canny_high": 120,
-        "morph_kernel": 5,
-        "min_area_ratio": 0.05,
-        "max_area_ratio": 0.98,
-        "approx_epsilon_ratio": 0.03,
-        "adaptive_block_size": 15,
-        "adaptive_c": 8,
-        "use_clahe": false,
-        "require_convex": true
-      },
-      "overall": {
-        "total": 20,
-        "success": 13,
-        "fail": 7,
-        "success_rate": 65.0
-      },
-      "by_condition": [
-        {
-          "condition": "단순 배경 + 정면",
-          "total": 5,
-          "success": 5,
-          "fail": 0,
-          "success_rate": 100.0
-        },
-        {
-          "condition": "그림자 있음",
-          "total": 5,
-          "success": 3,
-          "fail": 2,
-          "success_rate": 60.0
-        },
-        {
-          "condition": "45도 이상 기울어짐",
-          "total": 5,
-          "success": 4,
-          "fail": 1,
-          "success_rate": 80.0
-        },
-        {
-          "condition": "복잡한 배경",
-          "total": 5,
-          "success": 1,
-          "fail": 4,
-          "success_rate": 20.0
-        }
-      ]
     }
   },
   "per_image_matrix": {
     "easy_01": {
       "default": true,
-      "sensitive_shadow": true,
       "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": true
     },
     "easy_02": {
       "default": true,
-      "sensitive_shadow": false,
       "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": true
     },
     "easy_03": {
       "default": true,
-      "sensitive_shadow": true,
       "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": true
     },
     "easy_04": {
       "default": true,
-      "sensitive_shadow": false,
       "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": true
     },
     "easy_05": {
       "default": true,
-      "sensitive_shadow": true,
       "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": true
     },
     "shadow_01": {
       "default": true,
-      "sensitive_shadow": true,
       "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": false
     },
     "shadow_02": {
-      "default": true,
-      "sensitive_shadow": false,
-      "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "default": false,
+      "strong_denoise": false,
+      "morph_bridge": false,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": false
     },
     "shadow_03": {
       "default": false,
-      "sensitive_shadow": false,
       "strong_denoise": false,
-      "strict_edges": false,
-      "morph_bridge": false
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "shadow_04": {
-      "default": false,
-      "sensitive_shadow": false,
+      "default": true,
       "strong_denoise": false,
-      "strict_edges": false,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": true
     },
     "shadow_05": {
       "default": false,
-      "sensitive_shadow": false,
       "strong_denoise": false,
-      "strict_edges": false,
-      "morph_bridge": false
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "tilt_01": {
-      "default": true,
-      "sensitive_shadow": false,
+      "default": false,
       "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "morph_bridge": true,
+      "clahe_shadow_morph": true,
+      "heavy_blur_morph": true
     },
     "tilt_02": {
       "default": false,
-      "sensitive_shadow": false,
-      "strong_denoise": true,
-      "strict_edges": false,
-      "morph_bridge": true
+      "strong_denoise": false,
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "tilt_03": {
-      "default": true,
-      "sensitive_shadow": false,
-      "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "default": false,
+      "strong_denoise": false,
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": true
     },
     "tilt_04": {
       "default": false,
-      "sensitive_shadow": true,
       "strong_denoise": false,
-      "strict_edges": false,
-      "morph_bridge": false
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "tilt_05": {
       "default": false,
-      "sensitive_shadow": false,
-      "strong_denoise": true,
-      "strict_edges": false,
-      "morph_bridge": true
+      "strong_denoise": false,
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "complex_01": {
       "default": false,
-      "sensitive_shadow": true,
-      "strong_denoise": true,
-      "strict_edges": true,
-      "morph_bridge": true
+      "strong_denoise": false,
+      "morph_bridge": true,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "complex_02": {
       "default": false,
-      "sensitive_shadow": false,
-      "strong_denoise": true,
-      "strict_edges": false,
-      "morph_bridge": false
+      "strong_denoise": false,
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "complex_03": {
       "default": false,
-      "sensitive_shadow": false,
       "strong_denoise": false,
-      "strict_edges": false,
-      "morph_bridge": false
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "complex_04": {
       "default": false,
-      "sensitive_shadow": false,
       "strong_denoise": false,
-      "strict_edges": false,
-      "morph_bridge": false
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     },
     "complex_05": {
       "default": false,
-      "sensitive_shadow": false,
       "strong_denoise": false,
-      "strict_edges": false,
-      "morph_bridge": false
+      "morph_bridge": false,
+      "clahe_shadow_morph": false,
+      "heavy_blur_morph": false
     }
   },
-  "best_single_preset_success": 13,
-  "oracle_union_success": 15,
+  "best_single_preset_success": 9,
+  "oracle_union_success": 11,
   "total_images": 20,
   "parameter_dilemma_proven": true,
   "conflict_pairs": [
     {
       "preset_a": "default",
-      "preset_b": "sensitive_shadow",
-      "only_a_succeeds": [
-        "easy_02",
-        "easy_04",
-        "shadow_02",
-        "tilt_01",
-        "tilt_03"
-      ],
-      "only_b_succeeds": [
-        "tilt_04",
-        "complex_01"
-      ]
-    },
-    {
-      "preset_a": "sensitive_shadow",
       "preset_b": "strong_denoise",
       "only_a_succeeds": [
-        "tilt_04"
+        "shadow_04"
       ],
       "only_b_succeeds": [
-        "easy_02",
-        "easy_04",
-        "shadow_02",
-        "tilt_01",
-        "tilt_02",
-        "tilt_03",
-        "tilt_05",
-        "complex_02"
+        "tilt_01"
       ]
     },
     {
-      "preset_a": "sensitive_shadow",
-      "preset_b": "strict_edges",
+      "preset_a": "default",
+      "preset_b": "heavy_blur_morph",
       "only_a_succeeds": [
-        "tilt_04"
+        "shadow_01"
       ],
       "only_b_succeeds": [
-        "easy_02",
-        "easy_04",
-        "shadow_02",
         "tilt_01",
         "tilt_03"
-      ]
-    },
-    {
-      "preset_a": "sensitive_shadow",
-      "preset_b": "morph_bridge",
-      "only_a_succeeds": [
-        "tilt_04"
-      ],
-      "only_b_succeeds": [
-        "easy_02",
-        "easy_04",
-        "shadow_02",
-        "shadow_04",
-        "tilt_01",
-        "tilt_02",
-        "tilt_03",
-        "tilt_05"
       ]
     },
     {
       "preset_a": "strong_denoise",
-      "preset_b": "morph_bridge",
+      "preset_b": "heavy_blur_morph",
       "only_a_succeeds": [
-        "complex_02"
+        "shadow_01"
       ],
       "only_b_succeeds": [
-        "shadow_04"
+        "shadow_04",
+        "tilt_03"
+      ]
+    },
+    {
+      "preset_a": "morph_bridge",
+      "preset_b": "clahe_shadow_morph",
+      "only_a_succeeds": [
+        "complex_01"
+      ],
+      "only_b_succeeds": [
+        "shadow_02"
+      ]
+    },
+    {
+      "preset_a": "morph_bridge",
+      "preset_b": "heavy_blur_morph",
+      "only_a_succeeds": [
+        "shadow_01",
+        "complex_01"
+      ],
+      "only_b_succeeds": [
+        "tilt_03"
+      ]
+    },
+    {
+      "preset_a": "clahe_shadow_morph",
+      "preset_b": "heavy_blur_morph",
+      "only_a_succeeds": [
+        "shadow_01",
+        "shadow_02"
+      ],
+      "only_b_succeeds": [
+        "tilt_03"
       ]
     }
   ]

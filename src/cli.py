@@ -113,13 +113,21 @@ def build_parser() -> argparse.ArgumentParser:
     # [1차]: 20장 밝기 히스토그램 분석 서브커맨드(eda)를 등록합니다.
     # [2차]: 4번 창구: 20장 사진의 밝기 분포를 진단하는 창구입니다.
     p_eda = sub.add_parser("eda", help="20장 테스트 데이터셋 밝기 히스토그램 EDA 수행")
-    p_eda.add_argument("--metadata", default="data/metadata.json", help="데이터셋 메타데이터 경로")
+    p_eda.add_argument(
+        "--metadata",
+        default="data/flow_document_images/metadata_flow.json",
+        help="데이터셋 메타데이터 경로",
+    )
     p_eda.add_argument("-o", "--output", default="outputs/eda_summary.json", help="EDA 요약 JSON 저장 경로")
 
     # [1차]: 20장 정량적 성능 평가 서브커맨드(evaluate)를 등록합니다.
     # [2차]: 5번 창구: 20장 시험지를 채점하고 조건별 성공률을 뽑는 창구입니다.
     p_eval = sub.add_parser("evaluate", help="20장 테스트셋 정량적 성능 평가 수행")
-    p_eval.add_argument("--metadata", default="data/metadata.json", help="데이터셋 메타데이터 경로")
+    p_eval.add_argument(
+        "--metadata",
+        default="data/flow_document_images/metadata_flow.json",
+        help="데이터셋 메타데이터 경로",
+    )
     p_eval.add_argument("-o", "--output", default="outputs/eval_summary.json", help="평가 JSON 저장 경로")
     p_eval.add_argument("--save-stages-dir", default=None, help="20장 전체 몽타주 저장 폴더")
     p_eval.add_argument("--preset", choices=sorted(PRESETS.keys()), default="default")
@@ -127,7 +135,11 @@ def build_parser() -> argparse.ArgumentParser:
     # [1차]: 5개 프리셋 파라미터 딜레마 검증 서브커맨드(sweep)를 등록합니다.
     # [2차]: 6번 창구: 5가지 레시피를 모두 돌려 파라미터 딜레마를 입증하는 창구입니다.
     p_sweep = sub.add_parser("sweep", help="다중 프리셋 파라미터 스윕(파라미터 딜레마 검증)")
-    p_sweep.add_argument("--metadata", default="data/metadata.json", help="데이터셋 메타데이터 경로")
+    p_sweep.add_argument(
+        "--metadata",
+        default="data/flow_document_images/metadata_flow.json",
+        help="데이터셋 메타데이터 경로",
+    )
     p_sweep.add_argument("-o", "--output", default="outputs/sweep_summary.json", help="스윕 JSON 저장 경로")
 
     # [1차]: 구성이 완료된 ArgumentParser 객체를 반환합니다.

@@ -1,0 +1,566 @@
+{
+  "source": "Google Flow (Nano Banana 2.1)",
+  "total_images": 20,
+  "images": [
+    {
+      "id": "easy_01",
+      "filename": "easy_01.jpg",
+      "relative_path": "easy_01.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a single white A4 printed inspection report document lying flat and straight in the center of a clean dark charcoal matte desk, uniform soft indoor lighting, no shadows, all four white paper corners clearly visible with generous dark desk margin around all edges, natural camera look, sharp printed English text and table lines",
+      "gt_corners": [
+        [
+          179,
+          220
+        ],
+        [
+          721,
+          221
+        ],
+        [
+          722,
+          993
+        ],
+        [
+          178,
+          992
+        ]
+      ]
+    },
+    {
+      "id": "easy_02",
+      "filename": "easy_02.jpg",
+      "relative_path": "easy_02.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a white paper supermarket receipt lying flat and straight in the center of a clean dark walnut wooden table, uniform soft indoor lighting, no shadows, all four edges clearly visible with generous dark margin around the receipt, natural phone camera look",
+      "gt_corners": [
+        [
+          324,
+          155
+        ],
+        [
+          573,
+          154
+        ],
+        [
+          582,
+          1042
+        ],
+        [
+          321,
+          1045
+        ]
+      ]
+    },
+    {
+      "id": "easy_03",
+      "filename": "easy_03.jpg",
+      "relative_path": "easy_03.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a white medical prescription form with neat printed text and table boxes lying straight in the center of a plain dark navy desk mat, even overhead lighting, sharp contrast, all four corners clearly visible",
+      "gt_corners": [
+        [
+          144,
+          169
+        ],
+        [
+          745,
+          171
+        ],
+        [
+          749,
+          1033
+        ],
+        [
+          141,
+          1032
+        ]
+      ]
+    },
+    {
+      "id": "easy_04",
+      "filename": "easy_04.jpg",
+      "relative_path": "easy_04.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a clean white rectangular business card lying flat in the center of a smooth dark slate gray tabletop, uniform soft lighting, no glare or shadows, all four corners clearly visible with wide dark border",
+      "gt_corners": [
+        [
+          193,
+          435
+        ],
+        [
+          696,
+          434
+        ],
+        [
+          700,
+          758
+        ],
+        [
+          190,
+          758
+        ]
+      ]
+    },
+    {
+      "id": "easy_05",
+      "filename": "easy_05.jpg",
+      "relative_path": "easy_05.jpg",
+      "condition": "단순 배경 + 정면",
+      "difficulty": "easy",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a printed commercial invoice A4 sheet lying flat and straight on a plain dark gray desk pad, even indoor lighting, high contrast edges, all four paper corners fully visible inside frame",
+      "gt_corners": [
+        [
+          116,
+          133
+        ],
+        [
+          780,
+          139
+        ],
+        [
+          794,
+          1095
+        ],
+        [
+          108,
+          1078
+        ]
+      ]
+    },
+    {
+      "id": "shadow_01",
+      "filename": "shadow_01.jpg",
+      "relative_path": "shadow_01.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a white A4 printed report document on a dark desk with a soft diagonal shadow from a window frame falling across the lower half of the paper, all four paper corners visible inside frame",
+      "gt_corners": [
+        [
+          126,
+          166
+        ],
+        [
+          773,
+          165
+        ],
+        [
+          778,
+          1081
+        ],
+        [
+          123,
+          1081
+        ]
+      ]
+    },
+    {
+      "id": "shadow_02",
+      "filename": "shadow_02.jpg",
+      "relative_path": "shadow_02.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a white paper store receipt on a dark wooden table with a person's hand and smartphone casting a noticeable dark shadow diagonally across the middle and bottom right corner of the receipt",
+      "gt_corners": [
+        [
+          150,
+          228
+        ],
+        [
+          498,
+          170
+        ],
+        [
+          795,
+          932
+        ],
+        [
+          360,
+          1075
+        ]
+      ]
+    },
+    {
+      "id": "shadow_03",
+      "filename": "shadow_03.jpg",
+      "relative_path": "shadow_03.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo of an A4 printed invoice on a dark desk under harsh directional side lighting where a sharp high-contrast dark shadow cuts diagonally right across the paper, making half the document very dark and half bright",
+      "gt_corners": [
+        [
+          202,
+          282
+        ],
+        [
+          712,
+          290
+        ],
+        [
+          882,
+          962
+        ],
+        [
+          0,
+          945
+        ]
+      ]
+    },
+    {
+      "id": "shadow_04",
+      "filename": "shadow_04.jpg",
+      "relative_path": "shadow_04.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo of a printed white medical form on a dark table photographed in very dim low indoor lighting with heavy dark shadows covering most of the paper, low contrast moody dim lighting, realistic smartphone camera noise",
+      "gt_corners": [
+        [
+          366,
+          374
+        ],
+        [
+          761,
+          433
+        ],
+        [
+          685,
+          901
+        ],
+        [
+          21,
+          744
+        ]
+      ]
+    },
+    {
+      "id": "shadow_05",
+      "filename": "shadow_05.jpg",
+      "relative_path": "shadow_05.jpg",
+      "condition": "그림자 있음",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo of a glossy printed white A4 document on a light wooden table with a dark shadow falling across the left side and a strong bright overhead lamp glare reflection washing out the top right corner of the paper",
+      "gt_corners": [
+        [
+          362,
+          180
+        ],
+        [
+          875,
+          315
+        ],
+        [
+          618,
+          1105
+        ],
+        [
+          0,
+          815
+        ]
+      ]
+    },
+    {
+      "id": "tilt_01",
+      "filename": "tilt_01.jpg",
+      "relative_path": "tilt_01.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo of a white A4 printed inspection report placed on a dark matte desk rotated 45 degrees like a diamond and photographed from an angled perspective, all four paper corners fully visible on the desk",
+      "gt_corners": [
+        [
+          480,
+          251
+        ],
+        [
+          841,
+          450
+        ],
+        [
+          459,
+          954
+        ],
+        [
+          44,
+          624
+        ]
+      ]
+    },
+    {
+      "id": "tilt_02",
+      "filename": "tilt_02.jpg",
+      "relative_path": "tilt_02.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo taken from a steep 50-degree oblique angle looking across a dark wooden table at a printed commercial invoice sheet, showing strong trapezoid perspective foreshortening, all four corners visible inside frame",
+      "gt_corners": [
+        [
+          465,
+          222
+        ],
+        [
+          895,
+          342
+        ],
+        [
+          555,
+          995
+        ],
+        [
+          0,
+          628
+        ]
+      ]
+    },
+    {
+      "id": "tilt_03",
+      "filename": "tilt_03.jpg",
+      "relative_path": "tilt_03.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo taken from a low 55-degree tilted camera angle looking at a long white supermarket receipt lying on a dark desk, strong perspective distortion with the far top edge appearing much narrower and slightly out of focus",
+      "gt_corners": [
+        [
+          368,
+          70
+        ],
+        [
+          525,
+          70
+        ],
+        [
+          785,
+          1085
+        ],
+        [
+          135,
+          1090
+        ]
+      ]
+    },
+    {
+      "id": "tilt_04",
+      "filename": "tilt_04.jpg",
+      "relative_path": "tilt_04.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo taken from an extreme 60-degree low oblique angle of a printed medical chart on a wooden desk, severe perspective foreshortening and dim shadow along the far top edge, all four corners inside frame",
+      "gt_corners": [
+        [
+          495,
+          175
+        ],
+        [
+          895,
+          298
+        ],
+        [
+          470,
+          1058
+        ],
+        [
+          0,
+          560
+        ]
+      ]
+    },
+    {
+      "id": "tilt_05",
+      "filename": "tilt_05.jpg",
+      "relative_path": "tilt_05.jpg",
+      "condition": "45도 이상 기울어짐",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone photo taken from a steep 65-degree side angle of a slightly curled white A4 printed document on a dark desk, top paper edges slightly lifting off the table surface with extreme perspective foreshortening",
+      "gt_corners": [
+        [
+          338,
+          110
+        ],
+        [
+          870,
+          232
+        ],
+        [
+          438,
+          895
+        ],
+        [
+          0,
+          685
+        ]
+      ]
+    },
+    {
+      "id": "complex_01",
+      "filename": "complex_01.jpg",
+      "relative_path": "complex_01.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a white A4 printed document placed on a busy wooden office desk surrounded by a black keyboard edge, coffee mug, notebook, and pens scattered around the background, all four paper corners visible",
+      "gt_corners": [
+        [
+          204,
+          340
+        ],
+        [
+          655,
+          332
+        ],
+        [
+          714,
+          1023
+        ],
+        [
+          174,
+          1030
+        ]
+      ]
+    },
+    {
+      "id": "complex_02",
+      "filename": "complex_02.jpg",
+      "relative_path": "complex_02.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a printed white invoice lying on a busy high-contrast checkered plaid patterned tablecloth with a ballpoint pen and eyeglasses resting beside the paper",
+      "gt_corners": [
+        [
+          115,
+          112
+        ],
+        [
+          658,
+          255
+        ],
+        [
+          395,
+          1048
+        ],
+        [
+          0,
+          895
+        ]
+      ]
+    },
+    {
+      "id": "complex_03",
+      "filename": "complex_03.jpg",
+      "relative_path": "complex_03.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a white paper receipt lying flat on a very light cream beige marble countertop of almost the exact same bright color as the paper, very low contrast between paper border and background",
+      "gt_corners": [
+        [
+          298,
+          322
+        ],
+        [
+          602,
+          325
+        ],
+        [
+          610,
+          922
+        ],
+        [
+          295,
+          920
+        ]
+      ]
+    },
+    {
+      "id": "complex_04",
+      "filename": "complex_04.jpg",
+      "relative_path": "complex_04.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a heavily crumpled and folded white A4 printed paper with deep crease lines and shadows lying on a cluttered desk with charging cables, sticky notes, and magazines",
+      "gt_corners": [
+        [
+          198,
+          255
+        ],
+        [
+          708,
+          260
+        ],
+        [
+          790,
+          1038
+        ],
+        [
+          105,
+          1038
+        ]
+      ]
+    },
+    {
+      "id": "complex_05",
+      "filename": "complex_05.jpg",
+      "relative_path": "complex_05.jpg",
+      "condition": "복잡한 배경",
+      "difficulty": "hard",
+      "width": 896,
+      "height": 1200,
+      "prompt": "Realistic smartphone top-down photo of a printed white A4 document on a cluttered desk where a person's thumb holds down the bottom-right corner and a dark pen lies across the top-left edge, partially occluding two corners",
+      "gt_corners": [
+        [
+          108,
+          145
+        ],
+        [
+          772,
+          138
+        ],
+        [
+          805,
+          1118
+        ],
+        [
+          85,
+          1122
+        ]
+      ]
+    }
+  ]
+}

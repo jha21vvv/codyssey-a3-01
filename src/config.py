@@ -139,29 +139,39 @@ class ScanConfig:
 
 
 # [1차]: 파라미터 딜레마 실험 및 현장 빠른 전환을 위한 5가지 대표 파라미터 프리셋 사전입니다.
-# [2차]: '기본 모드', '어두운 그림자 모드', '강한 노이즈 제거 모드' 등 5가지 추천 레시피 세트입니다.
+# [2차]: '기본 모드', '강한 노이즈 제거', '엣지 연결', 'CLAHE 그림자 보정', '강블러+저임계값' 5가지 레시피 세트입니다.
 PRESETS: Dict[str, ScanConfig] = {
     # [1차]: 교과서적 기본 파이프라인 설정(블러 5, Canny 50/150, 모폴로지 미사용).
     # [2차]: 가장 무난한 표준 레시피입니다.
     "default": ScanConfig(blur_kernel=5, canny_low=50, canny_high=150, morph_kernel=0),
-    # [1차]: 저조도/암부 그림자용 민감 설정(작은 블러 3, 낮은 Canny 20/70, CLAHE + 닫힘 5).
-    # [2차]: 어두운 방에서 희미한 선까지 돋보기로 끌어올리는 초민감 레시피입니다.
-    "sensitive_shadow": ScanConfig(
-        blur_kernel=3, canny_low=20, canny_high=70, morph_kernel=5, use_clahe=True
-    ),
     # [1차]: 복잡한 배경/격자 제거용 강노이즈 억제 설정(큰 블러 9, 높은 Canny 80/200, 닫힘 3).
     # [2차]: 시끄러운 배경 무늬를 큰 지우개로 뭉개고 굵은 외곽선만 남기는 레시피입니다.
     "strong_denoise": ScanConfig(
         blur_kernel=9, canny_low=80, canny_high=200, morph_kernel=3, use_clahe=False
     ),
-    # [1차]: 강한 테두리만 엄격히 남기는 보수적 설정(블러 7, Canny 100/220).
-    # [2차]: 아주 확실하고 진한 테두리 선만 통과시키는 깐깐한 레시피입니다.
-    "strict_edges": ScanConfig(
-        blur_kernel=7, canny_low=100, canny_high=220, morph_kernel=0, use_clahe=False
-    ),
     # [1차]: 끊어진 엣지를 연결하는 모폴로지 닫힘 특화 설정(블러 5, Canny 40/120, 닫힘 5, ε=0.03).
-    # [2차]: 중간에 끊긴 점선 테두리를 넓은 테이프로 이어 붙여 복구하는 레시피입니다.
+    # [2차]: 중간에 끊긴 점선 테두리를 테이프로 이어 붙여 복구하는 레시피입니다.
     "morph_bridge": ScanConfig(
         blur_kernel=5, canny_low=40, canny_high=120, morph_kernel=5, approx_epsilon_ratio=0.03
+    ),
+    # [1차]: 손/물체 그림자 보정 특화 설정(CLAHE 활성화, 블러 7, Canny 70/180, 강한 닫힘 9, ε=0.04).
+    # [2차]: 그림자 속 숨은 테두리를 국소 조명 보정(CLAHE)과 넓은 테이프로 되살리는 레시피입니다.
+    "clahe_shadow_morph": ScanConfig(
+        blur_kernel=7,
+        canny_low=70,
+        canny_high=180,
+        morph_kernel=9,
+        approx_epsilon_ratio=0.04,
+        use_clahe=True,
+    ),
+    # [1차]: 원거리 흐림/기울어진 문서 특화 설정(강한 블러 11, 낮은 Canny 20/60, 강한 닫힘 9, ε=0.04).
+    # [2차]: 큰 지우개로 잔글씨를 지운 뒤 낮은 임계값으로 희미한 원거리 테두리를 잡는 레시피입니다.
+    "heavy_blur_morph": ScanConfig(
+        blur_kernel=11,
+        canny_low=20,
+        canny_high=60,
+        morph_kernel=9,
+        approx_epsilon_ratio=0.04,
+        use_clahe=False,
     ),
 }

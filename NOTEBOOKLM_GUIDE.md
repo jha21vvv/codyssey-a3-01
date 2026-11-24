@@ -53,15 +53,15 @@
 ### 🇰🇷 한국어 전용 프롬프트
 ```text
 두 명의 호스트(시니어 컴퓨터 비전 아키텍트와 3개월 차 주니어 개발자 멘토)가 대화하는 15분 내외의 한국어 딥다이브 팟캐스트를 진행해 주세요.
-1. 반드시 업로드된 실제 실험 수치를 정확히 인용하세요: 기본 설정 성공률 45%(9/20, 단순+정면 100%, 그림자 40%, 45도+ 40%, 복잡한 배경 0%), 단일 최고 프리셋 65%(13/20), Oracle 합집합 75%(15/20), 그리고 전 프리셋 실패 5건(shadow_03, shadow_05, complex_03, complex_04, complex_05).
-2. 특히 '45도 마름모에서 기존 sum/diff 좌표 정렬이 붕괴하고 무게중심 atan2 편각 정렬로 방어한 이야기', 'Windows 한글 경로 np.fromfile 우회', 'complex_02(strong_denoise 성공) vs shadow_04(morph_bridge 성공) vs tilt_04(sensitive_shadow 성공)의 파라미터 딜레마 충돌'을 생생한 일상 비유와 함께 다뤄 주세요.
+1. 반드시 Google Flow 실사 20장 실험 수치를 정확히 인용하세요: 기본 설정 성공률 35%(7/20, 단순+정면 100%, 그림자 40%, 45도+ 0%, 복잡한 배경 0%), 단일 최고 프리셋 45%(9/20), Oracle 합집합 55%(11/20), 그리고 96개 조합으로도 실패한 9건(45%: 분할 그림자 shadow_03, 빛 반사 shadow_05, 프레임 접촉 기울기 tilt_02/04/05, 격자/대리석/구겨짐/가림 complex_02~05).
+2. 특히 '45도 마름모에서 기존 sum/diff 좌표 정렬이 붕괴하고 무게중심 atan2 편각 정렬로 방어한 이야기', 'Windows 한글 경로 np.fromfile 우회', 'clahe_shadow_morph(shadow_02 구조) ↔ heavy_blur_morph(tilt_03 구조) ↔ morph_bridge(complex_01 구조)의 6쌍 파라미터 딜레마 충돌'을 생생한 일상 비유와 함께 다뤄 주세요.
 3. 마지막은 "그래서 왜 우리가 다음 단계에서 딥러닝(U-Net 분할, Corner Heatmap)을 배워야 하는가?"라는 통찰로 감동적으로 마무리해 주세요.
 ```
 
 ### 🇺🇸 English Custom Prompt
 ```text
-Host a 12-to-15-minute engaging deep-dive podcast between a Senior Computer Vision Architect and a Junior Developer Mentor discussing this OpenCV & NumPy Document Scanner project.
-1. Ground every technical claim in the exact benchmark data from REPORT.md: 45% (9/20) default accuracy (100% easy, 40% shadow, 40% >=45° tilt, 0% complex background), 65% (13/20) best single preset ceiling, 75% (15/20) oracle union, and 5 unsolvable hard-core failures.
-2. Highlight three standout engineering lessons using vivid everyday analogies: (a) why classic sum/diff 4-point ordering breaks on 45-degree rotated diamonds and how centroid polar-angle sorting with lexicographical tie-breaking fixes it without scipy/shapely; (b) Unicode-safe Windows image I/O via np.fromfile + cv2.imdecode; and (c) the empirical Parameter Dilemma proving why strong_denoise, morph_bridge, and sensitive_shadow directly contradict each other across images.
+Host a 12-to-15-minute engaging deep-dive podcast between a Senior Computer Vision Architect and a Junior Developer Mentor discussing this OpenCV & NumPy Document Scanner project evaluated on 20 photorealistic Google Flow document photos.
+1. Ground every technical claim in the exact benchmark data from REPORT.md: 35% (7/20) default accuracy (100% easy, 40% shadow, 0% >=45° tilt, 0% complex background), 45% (9/20) best single preset ceiling, 55% (11/20) oracle union, and 9 hard-core failures unsolvable across 96 tested parameter combinations.
+2. Highlight three standout engineering lessons using vivid everyday analogies: (a) why classic sum/diff 4-point ordering breaks on 45-degree rotated diamonds and how centroid polar-angle sorting with lexicographical tie-breaking fixes it without scipy/shapely; (b) Unicode-safe Windows image I/O via np.fromfile + cv2.imdecode; and (c) the empirical 6-way Parameter Dilemma where clahe_shadow_morph rescues shadow_02, heavy_blur_morph rescues tilt_03, and morph_bridge rescues complex_01 while breaking each other's wins.
 3. Conclude by connecting these firsthand rule-based limitations to why data-driven deep learning (semantic segmentation & corner heatmap regression) is essential for real-world generalization.
 ```

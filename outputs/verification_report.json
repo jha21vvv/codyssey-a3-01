@@ -22,15 +22,15 @@
       "tests_run": 20,
       "failures": 0,
       "errors": 0,
-      "elapsed_sec": 0.4732
+      "elapsed_sec": 0.486
     },
     {
       "id": "REQ-04",
       "name": "20장 테스트셋 밝기 히스토그램 EDA",
       "passed": true,
       "total_images": 20,
-      "easy_std": 88.41,
-      "hard_std": 67.58
+      "easy_std": 75.5,
+      "hard_std": 73.42
     },
     {
       "id": "REQ-05",
@@ -38,9 +38,9 @@
       "passed": true,
       "overall": {
         "total": 20,
-        "success": 9,
-        "fail": 11,
-        "success_rate": 45.0
+        "success": 7,
+        "fail": 13,
+        "success_rate": 35.0
       },
       "by_condition": [
         {
@@ -60,9 +60,9 @@
         {
           "condition": "45도 이상 기울어짐",
           "total": 5,
-          "success": 2,
-          "fail": 3,
-          "success_rate": 40.0
+          "success": 0,
+          "fail": 5,
+          "success_rate": 0.0
         },
         {
           "condition": "복잡한 배경",
@@ -77,18 +77,18 @@
       "id": "REQ-06",
       "name": "다중 프리셋 파라미터 딜레마 실증",
       "passed": true,
-      "best_single_preset": 13,
-      "oracle_union": 15,
-      "conflict_pairs": 5
+      "best_single_preset": 9,
+      "oracle_union": 11,
+      "conflict_pairs": 6
     },
     {
       "id": "REQ-07",
       "name": "단일 이미지 E2E 스캔 + 적응형 이진화",
       "passed": true,
-      "area_ratio": 0.4104,
+      "area_ratio": 0.3899,
       "scanned_shape": [
-        490,
-        404
+        772,
+        544
       ]
     },
     {

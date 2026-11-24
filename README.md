@@ -65,40 +65,40 @@ pip install -r requirements.txt
 
 ### 2. 주요 명령어
 ```bash
-# 1) 이미지 경로 입력 즉시 스캔 (단축 실행)
-python main.py data/test_images/easy_01.jpg -o outputs/scanned_easy_01.png
+# 1) 이미지 경로 입력 즉시 스캔 (Google Flow 실사 문서 단축 실행)
+python main.py data/flow_document_images/easy_01.jpg -o outputs/scanned_easy_01.png
 
 # 2) 단일 이미지 스캔 + 6단계 시각화 몽타주 저장 (Colab/헤드리스 환경 권장)
-python main.py scan data/test_images/easy_01.jpg -o outputs/scanned_easy_01.png --save-stages
+python main.py scan data/flow_document_images/shadow_02.jpg --preset clahe_shadow_morph --save-stages
 
 # 3) 단계별 OpenCV 윈도우 + 실시간 Blur/Canny 트랙바 GUI 실행 (로컬 데스크톱)
-python main.py gui data/test_images/shadow_04.jpg
+python main.py gui data/flow_document_images/shadow_02.jpg
 
 # 4) 실시간 웹캠 문서 스캔 모드 ('s': 캡처 저장, 'q': 종료)
 python main.py webcam --camera 0 --output-dir outputs/webcam
 
-# 5) 20장 테스트셋 밝기 히스토그램 EDA & 정량 평가 & 파라미터 스윕
+# 5) Google Flow 실사 20장 밝기 히스토그램 EDA & 정량 평가 & 파라미터 스윕
 python main.py eda
-python main.py evaluate --save-stages-dir outputs/stages
+python main.py evaluate --save-stages-dir outputs/flow_stages
 python main.py sweep
 ```
 
 ---
 
-## 📈 핵심 실험 결과 미리보기
+## 📈 핵심 실험 결과 미리보기 (Google Flow 실사 20장 기준)
 
 ![파라미터 딜레마 20장 x 5개 프리셋 결과](diagrams/04_benchmark_parameter_dilemma.png)
 
 ![실제 파이프라인 4대 대표 실행 결과](diagrams/05_real_pipeline_examples.png)
 
-- **기본 설정 (`default`, blur=5, Canny=50/150)**: 단순 배경+정면 **100% (5/5)**, 그림자 **40% (2/5)**, 45° 이상 기울기 **40% (2/5)**, 복잡한 배경 **0% (0/5)** → 전체 **45.0% (9/20)**
-- **파라미터 딜레마 실증**: 단일 최고 프리셋(`strong_denoise` / `morph_bridge`)은 **65.0% (13/20)**에서 한계에 봉착하며, 이미지별 최적 프리셋을 조합한 Oracle 합집합도 **75.0% (15/20)**입니다. 상세 분석은 [`REPORT.md`](REPORT.md)와 [`스터디.md`](스터디.md)를 참고하세요.
+- **기본 설정 (`default`, blur=5, Canny=50/150)**: 단순 배경+정면 **100% (5/5)**, 그림자 **40% (2/5)**, 45° 이상 기울기 **0% (0/5)**, 복잡한 배경 **0% (0/5)** → 전체 **35.0% (7/20)**
+- **파라미터 딜레마 실증**: 단일 최고 프리셋(`morph_bridge` / `clahe_shadow_morph`)은 **45.0% (9/20)**에서 한계에 봉착하며, 5프리셋 중 이미지별 최적 조합(`Oracle`)도 **55.0% (11/20)**입니다. 나머지 **9장(45%)**은 96개 규칙 조합으로도 해결 불가하며, 상세 분석은 [`REPORT.md`](REPORT.md)와 [`스터디.md`](스터디.md)를 참고하세요.
 
 ---
 
 ## 🧪 평가자용 원클릭 시각적 검증 가이드 (Evaluator Verification Runner)
 
-평가자는 아래 명령어 **단 한 줄**을 복사-붙여넣기하여 금지 라이브러리 검사, 45° 수동 좌표 정렬 동률 방어, 20개 자동화 단위 테스트, 20장 EDA/정량 평가/파라미터 스윕, 마크다운 상대경로 이미지 검증, 8단계 산출물 존재 여부를 즉시 일괄 검증할 수 있습니다.
+평가자는 아래 명령어 **단 한 줄**을 복사-붙여넣기하여 금지 라이브러리 검사, 45° 수동 좌표 정렬 동률 방어, 20개 자동화 단위 테스트, Google Flow 실사 20장 EDA/정량 평가/파라미터 스윕, 마크다운 상대경로 이미지 검증, 8단계 산출물 존재 여부를 즉시 일괄 검증할 수 있습니다.
 
 ### 실행 명령어
 ```bash
@@ -128,10 +128,10 @@ REQ-09   | [PASS]   | 8단계 마스터 워크플로우 필수 산출물 존재
   ----------------------------------------------------------
   단순 배경 + 정면         |      5 |    5 |    0 |  100.0%
   그림자 있음              |      5 |    2 |    3 |   40.0%
-  45도 이상 기울어짐       |      5 |    2 |    3 |   40.0%
+  45도 이상 기울어짐       |      5 |    0 |    5 |    0.0%
   복잡한 배경              |      5 |    0 |    5 |    0.0%
   ----------------------------------------------------------
-  전체 합계                |     20 |    9 |   11 |   45.0%
+  전체 합계                |     20 |    7 |   13 |   35.0%
 ====================================================================================
   OVERALL VERIFICATION: ALL PASS (100%)
 ====================================================================================

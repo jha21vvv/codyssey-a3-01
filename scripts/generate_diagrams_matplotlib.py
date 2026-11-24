@@ -262,14 +262,14 @@ def generate_02_geometry_perspective_math() -> Path:
 
 
 def generate_03_eda_histograms() -> Path:
-    """Diagram 3: Real 20-image Brightness Histogram Comparison & Dark-Image Edge Analysis."""
+    """Diagram 3: Real 20-image Flow Photo Brightness Histogram Comparison & Dark-Image Analysis."""
     eda = json.loads((PROJECT_ROOT / "outputs" / "eda_summary.json").read_text(encoding="utf-8"))
     bins = np.arange(256)
 
     fig, axes = plt.subplots(1, 2, figsize=(15.2, 5.6), dpi=180)
     fig.patch.set_facecolor("#FFFFFF")
     fig.suptitle(
-        "20장 테스트 데이터셋 이미지 탐색적 분석(EDA) — 밝기 히스토그램 및 조건별 대비/기울기 특성",
+        "Google Flow 실사 20장 이미지 탐색적 분석(EDA) — 밝기 히스토그램 및 조건별 대비/기울기 특성",
         fontsize=13.5,
         fontweight="bold",
         color="#0F172A",
@@ -284,25 +284,28 @@ def generate_03_eda_histograms() -> Path:
         "복잡한 배경": ("#D97706", 2.0, "-."),
     }
     ax.axvspan(0, 60, color="#FEE2E2", alpha=0.45, label="암부 압축 구간 (0~60: 기울기 저하)")
+    max_y = 0.0
     for cond, (color, lw, ls) in palette.items():
         hist = np.array(eda["condition_summary"][cond]["mean_histogram"])
         smooth = np.convolve(hist, np.ones(5) / 5.0, mode="same")
+        max_y = max(max_y, float(smooth.max()))
         ax.plot(bins, smooth, color=color, linewidth=lw, linestyle=ls, label=f"{cond} (n=5)")
 
+    top_y = max(0.030, max_y * 1.28)
     ax.annotate(
-        "쉬운 케이스: 배경(45)과 종이(244)의\n뚜렷한 양봉(Bimodal) 분리 → 엣지 선명",
-        xy=(242, 0.045),
-        xytext=(108, 0.049),
-        fontsize=8.6,
+        "쉬운 케이스: 어두운 배경과 밝은 종이(210~240)의\n뚜렷한 양봉(Bimodal) 분리 → 엣지 선명",
+        xy=(225, max_y * 0.85),
+        xytext=(92, top_y * 0.80),
+        fontsize=8.5,
         fontweight="bold",
         color="#14532D",
         bbox=dict(boxstyle="round,pad=0.3", facecolor="#F0FDF4", edgecolor="#4ADE80"),
         arrowprops=dict(arrowstyle="->", color="#16A34A", lw=1.6),
     )
     ax.annotate(
-        "그림자 케이스: 암부(0~50)로 픽셀 쏠림\n→ 밝기차(ΔI) 축소로 Canny 미검출",
-        xy=(22, 0.024),
-        xytext=(62, 0.032),
+        "그림자 케이스: 암부(0~55)로 픽셀 쏠림\n→ 밝기차(ΔI) 축소로 Canny 외곽 단절",
+        xy=(24, max_y * 0.48),
+        xytext=(58, top_y * 0.56),
         fontsize=8.4,
         fontweight="bold",
         color="#991B1B",
@@ -313,7 +316,7 @@ def generate_03_eda_histograms() -> Path:
     ax.set_xlabel("픽셀 밝기 값 (0 = 완전 검정, 255 = 완전 흰색)", fontsize=10)
     ax.set_ylabel("정규화 픽셀 비율", fontsize=10)
     ax.set_xlim(0, 255)
-    ax.set_ylim(0, 0.060)
+    ax.set_ylim(0, top_y)
     ax.grid(True, alpha=0.3)
     ax.legend(loc="upper left", fontsize=8.3, framealpha=0.92)
 
@@ -354,15 +357,20 @@ def generate_03_eda_histograms() -> Path:
 def generate_04_benchmark_parameter_dilemma() -> Path:
     """Diagram 4: 20-Image x 5-Preset Heatmap & Condition Success Rate (Parameter Dilemma)."""
     sweep = json.loads((PROJECT_ROOT / "outputs" / "sweep_summary.json").read_text(encoding="utf-8"))
-    eval_def = json.loads((PROJECT_ROOT / "outputs" / "eval_summary.json").read_text(encoding="utf-8"))
 
-    preset_names = ["default", "sensitive_shadow", "strong_denoise", "strict_edges", "morph_bridge"]
+    preset_names = [
+        "default",
+        "strong_denoise",
+        "morph_bridge",
+        "clahe_shadow_morph",
+        "heavy_blur_morph",
+    ]
     preset_labels = [
         "default\n(k5, 50/150)",
-        "sensitive\n(k3, 20/70+CLAHE)",
         "strong_denoise\n(k9, 80/200+M3)",
-        "strict_edges\n(k7, 100/220)",
         "morph_bridge\n(k5, 40/120+M5)",
+        "clahe_shadow\n(k7, 70/180+M9)",
+        "heavy_blur\n(k11, 20/60+M9)",
     ]
     image_ids = list(sweep["per_image_matrix"].keys())
 
@@ -374,7 +382,7 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
     fig, axes = plt.subplots(1, 2, figsize=(16, 7.6), dpi=180, gridspec_kw={"width_ratios": [1.22, 1.0]})
     fig.patch.set_facecolor("#FFFFFF")
     fig.suptitle(
-        "파라미터 딜레마(Parameter Dilemma) 정량 실증 — 20장 × 5개 프리셋 성공/실패 매트릭스 및 조건별 성공률",
+        "Google Flow 실사 20장 파라미터 딜레마(Parameter Dilemma) 실증 — 5개 프리셋 성공/실패 매트릭스",
         fontsize=13.5,
         fontweight="bold",
         color="#0F172A",
@@ -393,7 +401,7 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
             ax.text(c, r, txt, ha="center", va="center", fontsize=8.2, fontweight="bold", color=col)
 
     # Highlight conflict rows
-    for special_id, note_color in [("shadow_04", "#2563EB"), ("tilt_04", "#7C3AED"), ("complex_02", "#D97706")]:
+    for special_id, note_color in [("shadow_02", "#2563EB"), ("tilt_03", "#7C3AED"), ("complex_01", "#D97706")]:
         r_idx = image_ids.index(special_id)
         rect = patches.Rectangle((-0.48, r_idx - 0.48), len(preset_names) - 0.04, 0.96, fill=False, edgecolor=note_color, lw=2.3)
         ax.add_patch(rect)
@@ -402,7 +410,7 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
         ax.axhline(boundary, color="#334155", linewidth=1.8)
 
     ax.set_xticks(np.arange(len(preset_names)))
-    ax.set_xticklabels(preset_labels, fontsize=8.5)
+    ax.set_xticklabels(preset_labels, fontsize=8.4)
     ax.set_yticks(np.arange(len(image_ids)))
     ax.set_yticklabels(image_ids, fontsize=8.8)
     ax.set_title("① 이미지별 × 프리셋별 성공 매트릭스 (강조 테두리 = 상충 사례)", fontsize=11, fontweight="bold", pad=10)
@@ -416,7 +424,6 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
         by_c = {row["condition"]: row["success_rate"] for row in sweep["presets"][preset_key]["by_condition"]}
         return [by_c[c] for c in conds] + [sweep["presets"][preset_key]["overall"]["success_rate"]]
 
-    # Oracle per condition
     oracle_rates = []
     for c_idx, cond in enumerate(conds):
         ids_in_cond = image_ids[c_idx * 5 : (c_idx + 1) * 5]
@@ -424,13 +431,18 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
         oracle_rates.append(ok / 5.0 * 100.0)
     oracle_rates.append(sweep["oracle_union_success"] / 20.0 * 100.0)
 
+    def_pct = sweep["presets"]["default"]["overall"]["success_rate"]
+    mb_pct = sweep["presets"]["morph_bridge"]["overall"]["success_rate"]
+    cs_pct = sweep["presets"]["clahe_shadow_morph"]["overall"]["success_rate"]
+    ora_pct = sweep["oracle_union_success"] / 20.0 * 100.0
+
     x = np.arange(len(short_conds))
     w = 0.2
     series = [
-        ("default (45%)", _rates("default"), "#64748B"),
-        ("strong_denoise (65%)", _rates("strong_denoise"), "#2563EB"),
-        ("morph_bridge (65%)", _rates("morph_bridge"), "#10B981"),
-        ("Oracle 합집합 (75%)", oracle_rates, "#F59E0B"),
+        (f"default ({def_pct:.0f}%)", _rates("default"), "#64748B"),
+        (f"morph_bridge ({mb_pct:.0f}%)", _rates("morph_bridge"), "#10B981"),
+        (f"clahe_shadow ({cs_pct:.0f}%)", _rates("clahe_shadow_morph"), "#2563EB"),
+        (f"Oracle 합집합 ({ora_pct:.0f}%)", oracle_rates, "#F59E0B"),
     ]
     for i, (lbl, vals, col) in enumerate(series):
         bars = ax2.bar(x + (i - 1.5) * w, vals, width=w * 0.92, color=col, label=lbl)
@@ -438,7 +450,12 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
             h = bar.get_height()
             ax2.text(bar.get_x() + bar.get_width() / 2, h + 1.5, f"{h:.0f}%", ha="center", va="bottom", fontsize=6.7)
 
-    ax2.set_title("② 조건별 성공률 비교 — 단일 파라미터 한계(65%) vs Oracle(75%)", fontsize=11, fontweight="bold", pad=10)
+    ax2.set_title(
+        f"② 조건별 성공률 비교 — 단일 한계({sweep['best_single_preset_success']}/20) vs Oracle({sweep['oracle_union_success']}/20)",
+        fontsize=11,
+        fontweight="bold",
+        pad=10,
+    )
     ax2.set_xticks(x)
     ax2.set_xticklabels(short_conds, fontsize=9.2)
     ax2.set_ylabel("검출 성공률 (%)", fontsize=10)
@@ -446,11 +463,12 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
     ax2.grid(True, axis="y", alpha=0.3)
     ax2.legend(loc="upper right", fontsize=8.5)
 
+    hard_fail = 20 - sweep["oracle_union_success"]
     ax2.text(
         2.0,
         -22,
-        "핵심 결론: strong_denoise(complex_02 성공) ↔ morph_bridge(shadow_04 성공) ↔ sensitive(tilt_04 성공)\n"
-        "서로 다른 이미지가 정반대 파라미터를 요구하며, 5개 이미지(25%)는 어떤 규칙 조합으로도 해결 불가!",
+        "핵심 결론: clahe_shadow(shadow_02 구조) ↔ heavy_blur(tilt_03 구조) ↔ morph_bridge(complex_01 구조)\n"
+        f"서로 다른 실사 사진이 정반대 파라미터를 요구하며, {hard_fail}장({hard_fail*5}%)은 어떤 규칙 조합으로도 해결 불가!",
         ha="center",
         va="top",
         fontsize=8.8,
@@ -466,28 +484,28 @@ def generate_04_benchmark_parameter_dilemma() -> Path:
 
 
 def generate_05_real_pipeline_examples() -> Path:
-    """Diagram 5: Real visual side-by-side results (Success, 46° Tilt, Shadow Rescue, Occlusion Fail)."""
+    """Diagram 5: Real visual side-by-side results on Google Flow photorealistic photos."""
     scanner = DocumentScanner()
     cases = [
         ("easy_01.jpg", PRESETS["default"], "① easy_01\n(단순+정면 / Default)"),
-        ("tilt_01.jpg", PRESETS["default"], "② tilt_01\n(46° 마름모 / 편각 정렬)"),
-        ("shadow_04.jpg", PRESETS["morph_bridge"], "③ shadow_04\n(morph_bridge 구조)"),
-        ("complex_05.jpg", PRESETS["default"], "④ complex_05\n(모서리 가림 실패)"),
+        ("shadow_02.jpg", PRESETS["clahe_shadow_morph"], "② shadow_02\n(손 그림자 / CLAHE 구조)"),
+        ("tilt_03.jpg", PRESETS["heavy_blur_morph"], "③ tilt_03\n(55° 영수증 / 강블러 구조)"),
+        ("complex_05.jpg", PRESETS["default"], "④ complex_05\n(손가락+펜 가림 실패)"),
     ]
 
-    fig, axes = plt.subplots(4, 4, figsize=(15.0, 12.2), dpi=160)
+    fig, axes = plt.subplots(4, 4, figsize=(15.0, 13.0), dpi=160)
     fig.patch.set_facecolor("#FFFFFF")
     fig.suptitle(
-        "실제 20장 벤치마크 파이프라인 실행 결과 시각화 (원본 → Canny 엣지 → 윤곽선 검출 → 스캔 결과)",
+        "Google Flow 실사 20장 파이프라인 실제 실행 결과 (원본 → Canny 엣지 → 윤곽선 검출 → 스캔 결과)",
         fontsize=14,
         fontweight="bold",
         color="#0F172A",
     )
 
-    col_titles = ["1. 입력 원본", "2. Canny 엣지", "3. 윤곽선/꼭짓점 오버레이", "4. 최종 적응형 이진화 스캔"]
+    col_titles = ["1. 입력 실사 원본", "2. Canny 엣지", "3. 윤곽선/꼭짓점 오버레이", "4. 최종 적응형 이진화 스캔"]
 
     for row_idx, (fname, cfg, row_label) in enumerate(cases):
-        img = load_image(PROJECT_ROOT / "data" / "test_images" / fname)
+        img = load_image(PROJECT_ROOT / "data" / "flow_document_images" / fname)
         res = scanner.scan_image(img, cfg)
 
         panels = [

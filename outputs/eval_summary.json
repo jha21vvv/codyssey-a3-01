@@ -18,9 +18,9 @@
   },
   "overall": {
     "total": 20,
-    "success": 9,
-    "fail": 11,
-    "success_rate": 45.0
+    "success": 7,
+    "fail": 13,
+    "success_rate": 35.0
   },
   "by_condition": [
     {
@@ -40,9 +40,9 @@
     {
       "condition": "45도 이상 기울어짐",
       "total": 5,
-      "success": 2,
-      "fail": 3,
-      "success_rate": 40.0
+      "success": 0,
+      "fail": 5,
+      "success_rate": 0.0
     },
     {
       "condition": "복잡한 배경",
@@ -61,7 +61,7 @@
       "success": true,
       "iou": 1.0,
       "corner_error_px": 0.0,
-      "area_ratio": 0.4104,
+      "area_ratio": 0.3899,
       "failure_reason": null
     },
     {
@@ -72,7 +72,7 @@
       "success": true,
       "iou": 1.0,
       "corner_error_px": 0.0,
-      "area_ratio": 0.3196,
+      "area_ratio": 0.2108,
       "failure_reason": null
     },
     {
@@ -83,7 +83,7 @@
       "success": true,
       "iou": 1.0,
       "corner_error_px": 0.0,
-      "area_ratio": 0.4263,
+      "area_ratio": 0.4849,
       "failure_reason": null
     },
     {
@@ -92,9 +92,9 @@
       "condition": "단순 배경 + 정면",
       "detected": true,
       "success": true,
-      "iou": 0.7638,
-      "corner_error_px": 35.5,
-      "area_ratio": 0.2193,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.1524,
       "failure_reason": null
     },
     {
@@ -103,9 +103,9 @@
       "condition": "단순 배경 + 정면",
       "detected": true,
       "success": true,
-      "iou": 1.0,
-      "corner_error_px": 0.0,
-      "area_ratio": 0.3807,
+      "iou": 0.985,
+      "corner_error_px": 7.0,
+      "area_ratio": 0.6054,
       "failure_reason": null
     },
     {
@@ -116,19 +116,19 @@
       "success": true,
       "iou": 1.0,
       "corner_error_px": 0.0,
-      "area_ratio": 0.4113,
+      "area_ratio": 0.5543,
       "failure_reason": null
     },
     {
       "image_id": "shadow_02",
       "filename": "shadow_02.jpg",
       "condition": "그림자 있음",
-      "detected": true,
-      "success": true,
-      "iou": 1.0,
-      "corner_error_px": 0.0,
-      "area_ratio": 0.3311,
-      "failure_reason": null
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0006,
+      "failure_reason": "area_filter_rejected_all"
     },
     {
       "image_id": "shadow_03",
@@ -138,19 +138,19 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0023,
+      "area_ratio": 0.0008,
       "failure_reason": "area_filter_rejected_all"
     },
     {
       "image_id": "shadow_04",
       "filename": "shadow_04.jpg",
       "condition": "그림자 있음",
-      "detected": false,
-      "success": false,
-      "iou": 0.0,
-      "corner_error_px": null,
-      "area_ratio": 0.0023,
-      "failure_reason": "area_filter_rejected_all"
+      "detected": true,
+      "success": true,
+      "iou": 1.0,
+      "corner_error_px": 0.0,
+      "area_ratio": 0.2275,
+      "failure_reason": null
     },
     {
       "image_id": "shadow_05",
@@ -160,19 +160,19 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0023,
+      "area_ratio": 0.0003,
       "failure_reason": "area_filter_rejected_all"
     },
     {
       "image_id": "tilt_01",
       "filename": "tilt_01.jpg",
       "condition": "45도 이상 기울어짐",
-      "detected": true,
-      "success": true,
-      "iou": 0.996,
-      "corner_error_px": 1.0,
-      "area_ratio": 0.2635,
-      "failure_reason": null
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0049,
+      "failure_reason": "area_filter_rejected_all"
     },
     {
       "image_id": "tilt_02",
@@ -180,21 +180,21 @@
       "condition": "45도 이상 기울어짐",
       "detected": true,
       "success": false,
-      "iou": 0.2045,
-      "corner_error_px": 174.99,
-      "area_ratio": 0.0718,
-      "failure_reason": "inaccurate_quad(iou=0.204, err=175.0px)"
+      "iou": 0.1871,
+      "corner_error_px": 263.79,
+      "area_ratio": 0.0621,
+      "failure_reason": "inaccurate_quad(iou=0.187, err=263.8px)"
     },
     {
       "image_id": "tilt_03",
       "filename": "tilt_03.jpg",
       "condition": "45도 이상 기울어짐",
-      "detected": true,
-      "success": true,
-      "iou": 0.9986,
-      "corner_error_px": 0.35,
-      "area_ratio": 0.3246,
-      "failure_reason": null
+      "detected": false,
+      "success": false,
+      "iou": 0.0,
+      "corner_error_px": null,
+      "area_ratio": 0.0007,
+      "failure_reason": "area_filter_rejected_all"
     },
     {
       "image_id": "tilt_04",
@@ -204,7 +204,7 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0006,
+      "area_ratio": 0.0212,
       "failure_reason": "area_filter_rejected_all"
     },
     {
@@ -215,7 +215,7 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0011,
+      "area_ratio": 0.0008,
       "failure_reason": "area_filter_rejected_all"
     },
     {
@@ -226,7 +226,7 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0458,
+      "area_ratio": 0.0005,
       "failure_reason": "area_filter_rejected_all"
     },
     {
@@ -237,8 +237,8 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0212,
-      "failure_reason": "area_filter_rejected_all"
+      "area_ratio": 0.0614,
+      "failure_reason": "no_4_vertex_quad_found"
     },
     {
       "image_id": "complex_03",
@@ -248,7 +248,7 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0021,
+      "area_ratio": 0.0006,
       "failure_reason": "area_filter_rejected_all"
     },
     {
@@ -259,7 +259,7 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0366,
+      "area_ratio": 0.0008,
       "failure_reason": "area_filter_rejected_all"
     },
     {
@@ -270,7 +270,7 @@
       "success": false,
       "iou": 0.0,
       "corner_error_px": null,
-      "area_ratio": 0.0154,
+      "area_ratio": 0.0107,
       "failure_reason": "area_filter_rejected_all"
     }
   ]
