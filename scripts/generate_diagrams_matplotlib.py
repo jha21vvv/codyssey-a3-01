@@ -547,6 +547,323 @@ def generate_05_real_pipeline_examples() -> Path:
     return out
 
 
+def generate_06_contour_approx_guide() -> Path:
+    """Diagram 6: Visual 4-step beginner guide to findContours, Area Filter, approxPolyDP, and Convexity."""
+    fig, axes = plt.subplots(1, 4, figsize=(17.2, 5.2), dpi=180)
+    fig.patch.set_facecolor("#FFFFFF")
+    fig.suptitle(
+        "3단계 완전 시각화: 윤곽선 탐색(findContours) → 면적 필터링 → 다각형 근사(approxPolyDP) → 볼록성 검사",
+        fontsize=13.5,
+        fontweight="bold",
+        color="#0F172A",
+        y=1.02,
+    )
+
+    # Panel 1: findContours raw candidates
+    ax = axes[0]
+    ax.set_title("① findContours\n(모든 닫힌 도형 수집)", fontsize=10.5, fontweight="bold", color="#1E293B", pad=8)
+    ax.set_facecolor("#0F172A")
+    # Outer screen frame (99%)
+    ax.add_patch(patches.Rectangle((3, 3), 94, 94, fill=False, edgecolor="#94A3B8", lw=2.0, ls="--"))
+    ax.text(50, 92, "화면 전체 테두리 (99%)", ha="center", va="center", fontsize=8, color="#CBD5E1", fontweight="bold")
+    # Document candidate (42%)
+    doc_pts = np.array([[22, 18], [78, 22], [82, 78], [18, 74], [22, 18]])
+    ax.plot(doc_pts[:, 0], doc_pts[:, 1], color="#38BDF8", lw=2.5)
+    ax.text(50, 49, "문서 후보\n(면적 42%)", ha="center", va="center", fontsize=9, color="#38BDF8", fontweight="bold")
+    # Small dust & text specks (<5%)
+    for (sx, sy, sw, sh) in [(8, 10, 7, 5), (84, 82, 8, 6), (34, 60, 12, 4), (52, 34, 10, 4)]:
+        ax.add_patch(patches.Rectangle((sx, sy), sw, sh, fill=False, edgecolor="#FBBF24", lw=1.6))
+    ax.text(28, 10, "먼지/글자 조각 (0.5%)", ha="left", va="center", fontsize=7.8, color="#FDE68A", fontweight="bold")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Panel 2: Area Filter (5% ~ 98%)
+    ax = axes[1]
+    ax.set_title("② 면적 필터링 (5% ~ 98%)\n(너무 작거나 큰 후보 제거)", fontsize=10.5, fontweight="bold", color="#D97706", pad=8)
+    ax.set_facecolor("#0F172A")
+    ax.add_patch(patches.Rectangle((3, 3), 94, 94, fill=False, edgecolor="#EF4444", lw=1.8, ls=":"))
+    ax.text(50, 92, "× 99% > 98% (프레임 탈락)", ha="center", va="center", fontsize=8, color="#FCA5A5", fontweight="bold")
+    ax.fill(doc_pts[:, 0], doc_pts[:, 1], color="#10B981", alpha=0.22)
+    ax.plot(doc_pts[:, 0], doc_pts[:, 1], color="#34D399", lw=2.8)
+    ax.text(50, 49, "○ 42% 통과!\n(5% ≤ 42% ≤ 98%)", ha="center", va="center", fontsize=9, color="#6EE7B7", fontweight="bold")
+    for (sx, sy, sw, sh) in [(8, 10, 7, 5), (84, 82, 8, 6)]:
+        ax.add_patch(patches.Rectangle((sx, sy), sw, sh, fill=False, edgecolor="#EF4444", lw=1.5))
+        ax.text(sx + sw / 2, sy + sh / 2, "×", ha="center", va="center", fontsize=11, color="#EF4444", fontweight="bold")
+    ax.text(50, 10, "× 0.5% < 5% (티끌 탈락)", ha="center", va="center", fontsize=8, color="#FCA5A5", fontweight="bold")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Panel 3: approxPolyDP (120 wobbly points -> 4 clean corners)
+    ax = axes[2]
+    ax.set_title("③ approxPolyDP (다각형 근사)\n(울퉁불퉁 점 120개 → 꼭짓점 4개)", fontsize=10.5, fontweight="bold", color="#2563EB", pad=8)
+    ax.set_facecolor("#F8FAFC")
+    rng = np.random.default_rng(7)
+    base_corners = np.array([[20, 22], [80, 18], [84, 80], [16, 76]], dtype=float)
+    wobbly_x, wobbly_y = [], []
+    for i in range(4):
+        p1, p2 = base_corners[i], base_corners[(i + 1) % 4]
+        t = np.linspace(0, 1, 24, endpoint=False)
+        edge_x = p1[0] + (p2[0] - p1[0]) * t + rng.uniform(-2.6, 2.6, size=len(t))
+        edge_y = p1[1] + (p2[1] - p1[1]) * t + rng.uniform(-2.6, 2.6, size=len(t))
+        wobbly_x.extend(edge_x)
+        wobbly_y.extend(edge_y)
+    wobbly_x.append(wobbly_x[0])
+    wobbly_y.append(wobbly_y[0])
+
+    ax.plot(wobbly_x, wobbly_y, color="#94A3B8", lw=1.5, label="원본 윤곽(흔들린 점 96개)")
+    ax.scatter(wobbly_x[::3], wobbly_y[::3], color="#EF4444", s=12, zorder=3)
+    clean_poly = np.vstack([base_corners, base_corners[0]])
+    ax.plot(clean_poly[:, 0], clean_poly[:, 1], color="#16A34A", lw=2.8, label="approxPolyDP 직선화 (4점)")
+    ax.scatter(base_corners[:, 0], base_corners[:, 1], color="#15803D", s=65, zorder=5)
+    for idx, (cx, cy) in enumerate(base_corners):
+        dx = -10 if cx < 50 else 5
+        dy = -7 if cy < 50 else 5
+        ax.text(cx + dx, cy + dy, f"V{idx+1}", fontsize=8.5, fontweight="bold", color="#14532D")
+    ax.text(
+        50,
+        50,
+        "허용 오차(ε=2%) 안의\n잔떨림을 쫙 펴서\n꼭짓점 4개만 남김!",
+        ha="center",
+        va="center",
+        fontsize=8.5,
+        color="#1E3A8A",
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="#EFF6FF", edgecolor="#60A5FA"),
+    )
+    ax.set_xlim(2, 98)
+    ax.set_ylim(2, 98)
+    ax.legend(loc="lower center", fontsize=7.4, framealpha=0.92)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Panel 4: Convex (PASS) vs Concave (FAIL)
+    ax = axes[3]
+    ax.set_title("④ 볼록(Convex) 최종 검사\n(정상 종이 ○ vs 움푹 파임 ×)", fontsize=10.5, fontweight="bold", color="#16A34A", pad=8)
+    ax.set_facecolor("#F8FAFC")
+
+    # Left: Convex PASS
+    good_q = np.array([[8, 30], [42, 24], [46, 76], [10, 72], [8, 30]])
+    ax.fill(good_q[:, 0], good_q[:, 1], color="#BBF7D0", alpha=0.65)
+    ax.plot(good_q[:, 0], good_q[:, 1], "-o", color="#15803D", lw=2.3, ms=5)
+    ax.text(27, 86, "○ 볼록 4각형\n(합격! PASS)", ha="center", va="center", fontsize=8.8, fontweight="bold", color="#14532D")
+    ax.text(27, 13, "고무줄로 감싸면\n4변이 팽팽함", ha="center", va="center", fontsize=7.8, color="#166534")
+
+    ax.axvline(51, color="#CBD5E1", ls="--", lw=1.4)
+
+    # Right: Concave / Occluded FAIL
+    bad_q = np.array([[57, 26], [92, 26], [92, 56], [76, 56], [76, 74], [57, 74], [57, 26]])
+    ax.fill(bad_q[:, 0], bad_q[:, 1], color="#FECACA", alpha=0.65)
+    ax.plot(bad_q[:, 0], bad_q[:, 1], "-o", color="#DC2626", lw=2.3, ms=5)
+    ax.annotate(
+        "손가락 가림\n(움푹 파임!)",
+        xy=(77, 57),
+        xytext=(78, 78),
+        ha="center",
+        fontsize=7.6,
+        fontweight="bold",
+        color="#991B1B",
+        arrowprops=dict(arrowstyle="->", color="#DC2626", lw=1.5),
+    )
+    ax.text(74, 13, "× 오목/6각형\n(탈락! FAIL)", ha="center", va="center", fontsize=8.8, fontweight="bold", color="#991B1B")
+
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    out = DIAGRAMS_DIR / "06_contour_approx_convex_guide.png"
+    fig.tight_layout()
+    fig.savefig(out, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    return out
+
+
+def generate_07_stage4_perspective_guide() -> Path:
+    """Diagram 7: Visual 3-step beginner guide to Stage 4 (Edge length -> 3x3 Homography grid -> Real warp)."""
+    fig, axes = plt.subplots(1, 3, figsize=(16.2, 5.4), dpi=180)
+    fig.patch.set_facecolor("#FFFFFF")
+    fig.suptitle(
+        "4단계 완전 시각화: 변 길이 측정 → 3×3 투시 변환 행렬(격자 다림질) → 실제 문서 정면 복원",
+        fontsize=13.5,
+        fontweight="bold",
+        color="#0F172A",
+        y=1.02,
+    )
+
+    # Panel 1: Measuring 4 sides & choosing max W, max H
+    ax = axes[0]
+    ax.set_title("① 네 변 길이 재기 (피타고라스)\n(더 긴 변을 최종 가로·세로로 선택)", fontsize=10.5, fontweight="bold", color="#1E293B", pad=8)
+    ax.set_facecolor("#F8FAFC")
+    trap = np.array([[28, 78], [72, 74], [88, 20], [12, 24]], dtype=float)
+    poly = np.vstack([trap, trap[0]])
+    ax.fill(poly[:, 0], poly[:, 1], color="#DBEAFE", alpha=0.65)
+    ax.plot(poly[:, 0], poly[:, 1], "-o", color="#2563EB", lw=2.5, ms=7)
+    for (px, py), lbl, (dx, dy) in zip(trap, ["TL", "TR", "BR", "BL"], [(-11, 4), (4, 4), (3, -6), (-11, -6)]):
+        ax.text(px + dx, py + dy, lbl, fontsize=9, fontweight="bold", color="#1E3A8A")
+    ax.text(50, 83, "윗변 W1 = 220px", ha="center", fontsize=8.5, color="#475569", fontweight="bold")
+    ax.text(50, 12, "아랫변 W2 = 360px (더 김! → 가로 채택)", ha="center", fontsize=8.5, color="#DC2626", fontweight="bold")
+    ax.text(8, 52, "왼변\n380px", ha="center", fontsize=8, color="#475569", fontweight="bold")
+    ax.text(91, 49, "오른변\n410px\n(채택!)", ha="center", fontsize=8, color="#16A34A", fontweight="bold")
+    ax.text(
+        50,
+        49,
+        "새 캔버스 크기:\nW = max(220, 360) = 360\nH = max(380, 410) = 410",
+        ha="center",
+        va="center",
+        fontsize=8.3,
+        color="#0F172A",
+        bbox=dict(boxstyle="round,pad=0.35", facecolor="#FFFFFF", edgecolor="#60A5FA"),
+    )
+    ax.set_xlim(0, 102)
+    ax.set_ylim(2, 95)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Panel 2: Homography Grid Un-warping Visualization
+    ax = axes[1]
+    ax.set_title("② 3×3 행렬(M)의 역할\n(좁은 윗칸은 늘리고 비뚤어진 칸은 폄)", fontsize=10.5, fontweight="bold", color="#2563EB", pad=8)
+    ax.set_facecolor("#F8FAFC")
+    src_g = np.array([[14, 72], [38, 72], [46, 22], [6, 22]], dtype=np.float32)
+    dst_g = np.array([[62, 74], [94, 74], [94, 22], [62, 22]], dtype=np.float32)
+    # Draw perspective grid inside left trapezoid
+    for t in np.linspace(0, 1, 5):
+        p_left = src_g[0] * (1 - t) + src_g[3] * t
+        p_right = src_g[1] * (1 - t) + src_g[2] * t
+        ax.plot([p_left[0], p_right[0]], [p_left[1], p_right[1]], color="#EF4444", lw=1.3, alpha=0.8)
+        p_top = src_g[0] * (1 - t) + src_g[1] * t
+        p_bot = src_g[3] * (1 - t) + src_g[2] * t
+        ax.plot([p_top[0], p_bot[0]], [p_top[1], p_bot[1]], color="#EF4444", lw=1.3, alpha=0.8)
+    # Draw uniform grid inside right rectangle
+    for t in np.linspace(0, 1, 5):
+        y = 22 + (74 - 22) * t
+        x = 62 + (94 - 62) * t
+        ax.plot([62, 94], [y, y], color="#16A34A", lw=1.4, alpha=0.85)
+        ax.plot([x, x], [22, 74], color="#16A34A", lw=1.4, alpha=0.85)
+
+    ax.annotate(
+        "",
+        xy=(60, 48),
+        xytext=(46, 48),
+        arrowprops=dict(arrowstyle="-|>,head_width=0.35,head_length=0.5", color="#1D4ED8", lw=2.5),
+    )
+    ax.text(53, 56, "M (3×3)", ha="center", fontsize=8.8, fontweight="bold", color="#1D4ED8")
+    ax.text(26, 82, "원근 왜곡 격자\n(위가 좁고 아래가 넓음)", ha="center", fontsize=8.2, color="#991B1B", fontweight="bold")
+    ax.text(78, 82, "정면 균일 격자\n(모든 칸이 똑같은 직사각형)", ha="center", fontsize=8.2, color="#14532D", fontweight="bold")
+    ax.text(50, 10, "warpPerspective가 모든 픽셀을 이 공식대로 재배치!", ha="center", fontsize=8.4, color="#1E293B", fontweight="bold")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(2, 95)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Panel 3: Real Before -> After warp on Flow tilt_01.jpg
+    ax = axes[2]
+    ax.set_title("③ 실제 실사 적용 (tilt_01: 45° 마름모)\n(왼쪽 원본 → 오른쪽 반듯한 정면 복원)", fontsize=10.5, fontweight="bold", color="#16A34A", pad=8)
+    scanner = DocumentScanner()
+    img_t1 = load_image(PROJECT_ROOT / "data" / "flow_document_images" / "tilt_01.jpg")
+    res_t1 = scanner.scan_image(img_t1, PRESETS["morph_bridge"])
+    orig_rgb = cv2.cvtColor(res_t1.contour_overlay, cv2.COLOR_BGR2RGB)
+    warp_rgb = cv2.cvtColor(res_t1.warped, cv2.COLOR_BGR2RGB)
+    h_target = 360
+    o_small = cv2.resize(orig_rgb, (int(orig_rgb.shape[1] * h_target / orig_rgb.shape[0]), h_target))
+    w_small = cv2.resize(warp_rgb, (int(warp_rgb.shape[1] * h_target / warp_rgb.shape[0]), h_target))
+    gap = np.full((h_target, 18, 3), 245, dtype=np.uint8)
+    combined = np.hstack([o_small, gap, w_small])
+    ax.imshow(combined)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    out = DIAGRAMS_DIR / "07_stage4_perspective_warp_guide.png"
+    fig.tight_layout()
+    fig.savefig(out, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    return out
+
+
+def generate_08_stage5_adaptive_guide() -> Path:
+    """Diagram 8: Visual 3-panel beginner guide to Stage 5 (1D profile + Real Global vs Adaptive on shadow_02)."""
+    fig, axes = plt.subplots(1, 3, figsize=(16.2, 5.4), dpi=180)
+    fig.patch.set_facecolor("#FFFFFF")
+    fig.suptitle(
+        "5단계 완전 시각화: 왜 전역 이진화는 그림자에서 망하고, 적응형 이진화는 살아남는가?",
+        fontsize=13.5,
+        fontweight="bold",
+        color="#0F172A",
+        y=1.02,
+    )
+
+    # Panel 1: 1D brightness cross-section illustrating global vs adaptive threshold
+    ax = axes[0]
+    ax.set_title("① 밝기 단면 원리 비교\n(빨간 점선=전역 고정 vs 초록 실선=동네 평균)", fontsize=10.5, fontweight="bold", color="#1E293B", pad=8)
+    x = np.linspace(0, 100, 400)
+    # Paper background smoothly drops from 230 (bright left) to 95 (shadow right)
+    bg_curve = 230.0 - 135.0 / (1.0 + np.exp(-(x - 50.0) / 6.0))
+    signal = bg_curve.copy()
+    # Add 4 dark text dips (2 in bright side, 2 in shadow side)
+    for tx, depth in [(16, 155), (34, 150), (66, 65), (84, 60)]:
+        signal -= depth * np.exp(-((x - tx) ** 2) / 3.0)
+
+    ax.axvspan(50, 100, color="#E2E8F0", alpha=0.6, label="그림자 구역 (오른쪽 절반)")
+    ax.plot(x, signal, color="#0F172A", lw=2.0, label="실제 픽셀 밝기 (골짜기=글씨)")
+    ax.axhline(128, color="#DC2626", ls="--", lw=2.0, label="전역 기준선 (고정 128)")
+    ax.plot(x, bg_curve - 14.0, color="#16A34A", lw=2.2, label="적응형 기준선 (동네 평균 - C)")
+    ax.annotate(
+        "전역(128)보다 낮아\n종이까지 전부 검정!",
+        xy=(75, 95),
+        xytext=(54, 165),
+        fontsize=8.2,
+        fontweight="bold",
+        color="#991B1B",
+        bbox=dict(boxstyle="round,pad=0.25", facecolor="#FEF2F2", edgecolor="#F87171"),
+        arrowprops=dict(arrowstyle="->", color="#DC2626", lw=1.5),
+    )
+    ax.annotate(
+        "초록선 아래 골짜기만\n정확히 글씨 판정!",
+        xy=(66, 35),
+        xytext=(12, 18),
+        fontsize=8.2,
+        fontweight="bold",
+        color="#14532D",
+        bbox=dict(boxstyle="round,pad=0.25", facecolor="#F0FDF4", edgecolor="#4ADE80"),
+        arrowprops=dict(arrowstyle="->", color="#16A34A", lw=1.5),
+    )
+    ax.set_xlabel("문서 가로 위치 (왼쪽=밝음, 오른쪽=그림자)", fontsize=9)
+    ax.set_ylabel("픽셀 밝기 (0=검정, 255=흰색)", fontsize=9)
+    ax.set_ylim(0, 265)
+    ax.grid(True, alpha=0.3)
+    ax.legend(loc="upper right", fontsize=7.4, framealpha=0.94)
+
+    # Real warped shadow_02 image for Panels 2 & 3
+    scanner = DocumentScanner()
+    img_s2 = load_image(PROJECT_ROOT / "data" / "flow_document_images" / "shadow_02.jpg")
+    res_s2 = scanner.scan_image(img_s2, PRESETS["clahe_shadow_morph"])
+    warped_gray = cv2.cvtColor(res_s2.warped, cv2.COLOR_BGR2GRAY)
+    _, global_bin = cv2.threshold(warped_gray, 128, 255, cv2.THRESH_BINARY)
+    adaptive_bin = res_s2.scanned
+
+    # Panel 2: Real Global Thresholding failure
+    ax = axes[1]
+    ax.set_title("② 전역 이진화 (고정 기준=128)\n[실패 ×] 그림자 영역이 새까맣게 먹통!", fontsize=10.5, fontweight="bold", color="#DC2626", pad=8)
+    ax.imshow(global_bin, cmap="gray")
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Panel 3: Real Adaptive Thresholding success
+    ax = axes[2]
+    ax.set_title("③ 적응형 이진화 (15×15 동네 평균, C=8)\n[성공 ○] 손 그림자 사라지고 글씨·바코드 복원!", fontsize=10.5, fontweight="bold", color="#16A34A", pad=8)
+    ax.imshow(adaptive_bin, cmap="gray")
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    out = DIAGRAMS_DIR / "08_stage5_adaptive_threshold_guide.png"
+    fig.tight_layout()
+    fig.savefig(out, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    return out
+
+
 def main() -> None:
     configure_utf8_console()
     _setup_korean_font()
@@ -557,6 +874,9 @@ def main() -> None:
         generate_03_eda_histograms(),
         generate_04_benchmark_parameter_dilemma(),
         generate_05_real_pipeline_examples(),
+        generate_06_contour_approx_guide(),
+        generate_07_stage4_perspective_guide(),
+        generate_08_stage5_adaptive_guide(),
     ]
     for path in outputs:
         print(f"[OK] Generated diagram: {path.relative_to(PROJECT_ROOT)}")
