@@ -336,6 +336,9 @@
 - `clahe_shadow_morph`: 어두운 곳에 **손전등(CLAHE)** 비추기 + 넓은 테이프
 - `heavy_blur_morph`: 아주 큰 지우개 + **아주 약한 선도 다 잡기**
 
+빈틈이 1 ~ 4픽셀 이하로 가까우면 → 이어 붙임!
+빈틈이 5픽셀 이상 멀리 떨어져 있으면 → 안 붙음! (공식: 커널이 k×k이면 최대 k - 1 픽셀 이하의 끊김을 메웁니다. k=3은 2px, k=5는 4px, k=9는 8px까지!)
+
 ![파라미터 딜레마 20장 x 5개 프리셋 매트릭스](../diagrams/04_benchmark_parameter_dilemma.png)
 
 > 🔎 **[그림 4 한 번에 직관 이해하기 (`04_benchmark_parameter_dilemma.png`)]**
