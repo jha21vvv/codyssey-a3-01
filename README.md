@@ -138,3 +138,74 @@ REQ-09   | [PASS]   | 8단계 마스터 워크플로우 필수 산출물 존재
 ```
 
 > 전체 JSON 검증 리포트는 터미널 하단에 출력됨과 동시에 `outputs/verification_report.json` 파일로 자동 저장됩니다.
+
+---
+
+## 🎬 평가자 앞 실시간 시연 플레이북 (Live Demo Guide)
+
+평가자 앞에서 **4가지 대표 샘플 유형(`단순+정면` · `그림자` · `45° 이상 기울기` · `복잡한 배경`)**이 각 처리 단계(`원본 → 블러 → Canny → 윤곽선 → 투시 변환 → 적응형 이진화`)마다 어떻게 변하는지, 그리고 **트랙바 조절에 따른 성공·실패(파라미터 딜레마)**를 순서대로 시연할 수 있는 복붙 시나리오입니다.
+
+> **⌨️ GUI / 웹캠 공통 단축키**: `s` = 현재 스캔본 + 6단계 몽타주 즉시 저장 · `q` 또는 `ESC` = 창 안전 종료
+
+### 📋 시연 한눈에 보기 (샘플 유형별 시연 포인트)
+
+| 순서 | 샘플 유형 | 추천 이미지 | 시연할 핵심 장면 (평가자 어필 포인트) |
+| :---: | :--- | :--- | :--- |
+| **①** | **단순 배경 + 정면** | `easy_01.jpg` | 기본 설정만으로 5단계 창이 완벽히 동작하며 IoU `1.000`, 오차 `0.0px` 깔끔한 스캔본 출력 |
+| **②** | **그림자 있음** | `shadow_02.jpg` | 기본 설정 실패 → `clahe_shadow_morph` 적용 시 손 그림자 영수증 구출 + **적응형 이진화로 손 그림자 소멸** |
+| **③** | **45° 이상 기울어짐** | `tilt_01.jpg` / `tilt_03.jpg` | 45° 마름모에서 **수동 `atan2` 편각 정렬**이 꼬임 없이 `TL→TR→BR→BL` 정렬 + 55° 영수증 원근 복원 |
+| **④** | **복잡한 배경 & 한계** | `complex_01.jpg` / `complex_05.jpg` | 책상 소품(`complex_01`)은 `morph_bridge`로 성공 vs 손가락+펜 가림(`complex_05`)은 트랙바를 돌려도 실패 → **딥러닝 필요성 증명** |
+
+---
+
+### ▶️ Step 1. 샘플별 5단계 실시간 GUI & 트랙바 시연 (추천)
+
+```bash
+# ① [단순 배경 + 정면] 기본 설정 5단계 창 완벽 동작 확인
+python main.py gui data/flow_document_images/easy_01.jpg
+
+# ② [그림자 있음] 손 그림자 영수증 — 트랙바(Blur/Canny/Morph) 조절하며 실시간 검출 & 그림자 제거 확인
+python main.py gui data/flow_document_images/shadow_02.jpg --preset clahe_shadow_morph
+
+# ③ [45° 이상 기울어짐] 45° 마름모 문서 — 수동 편각 정렬(TL-TR-BR-BL) & 정면 다림질 확인
+python main.py gui data/flow_document_images/tilt_01.jpg --preset morph_bridge
+
+# ④ [복잡한 배경 / 규칙 한계] 손가락+펜 모서리 가림 — 트랙바를 움직여도 4꼭짓점 규칙이 깨지는 한계 직접 시연
+python main.py gui data/flow_document_images/complex_05.jpg
+```
+morph = 모폴로지 닫힘 연산 (Morphological Closing) = 「끊어진 테두리를 이어 붙이는 테이프」입니다!
+---
+
+### ▶️ Step 2. 4대 샘플 6단계 몽타주(이미지 파일) 한 번에 뽑아 비교하기
+
+GUI 창 대신(또는 병행해서) **원본 → 블러 → 엣지 → 윤곽선 → 투시 변환 → 최종 스캔본 6컷 포스터**를 폴더(`outputs/demo_live/`)에 즉시 저장해 결과 파일로 비교할 수 있습니다.
+
+```bash
+# ① 단순+정면 (기본 설정 성공)
+python main.py scan data/flow_document_images/easy_01.jpg --save-stages --stages-dir outputs/demo_live
+
+# ② 손 그림자 영수증 (기본 설정 실패 vs CLAHE 프리셋 구조 비교)
+python main.py scan data/flow_document_images/shadow_02.jpg --save-stages --stages-dir outputs/demo_live/shadow_fail
+python main.py scan data/flow_document_images/shadow_02.jpg --preset clahe_shadow_morph --save-stages --stages-dir outputs/demo_live/shadow_pass
+
+# ③ 55° 급경사 영수증 (강블러+저임계값 프리셋 원근 복원)
+python main.py scan data/flow_document_images/tilt_03.jpg --preset heavy_blur_morph --save-stages --stages-dir outputs/demo_live
+
+# ④ 복잡한 배경 (책상 소품 성공 vs 손가락 가림 실패)
+python main.py scan data/flow_document_images/complex_01.jpg --preset morph_bridge --save-stages --stages-dir outputs/demo_live
+python main.py scan data/flow_document_images/complex_05.jpg --save-stages --stages-dir outputs/demo_live
+```
+
+---
+
+### ▶️ Step 3. 20장 일괄 정량 분석 · 파라미터 딜레마 · 웹캠 라이브 마무리
+
+```bash
+# 20장 밝기 분포(EDA) → 기본 정량 평가(35%) → 5프리셋 파라미터 딜레마 스윕(45% vs Oracle 55%)
+python main.py eda
+python main.py evaluate
+python main.py sweep
+
+# (선택) 실제 종이를 카메라에 비추며 실시간 윤곽선 검출 & 's' 키로 즉시 스캔 저장
+python main.py webcam --camera 0 --output-dir outputs/webcam
+```

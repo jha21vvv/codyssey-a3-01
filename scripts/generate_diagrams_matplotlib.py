@@ -864,6 +864,141 @@ def generate_08_stage5_adaptive_guide() -> Path:
     return out
 
 
+def generate_09_homography_3x3_anatomy() -> Path:
+    """Diagram 9: Visual 3-panel beginner guide to WHY (x, y, 1) and how the 3x3 Homography matrix works."""
+    fig, axes = plt.subplots(1, 3, figsize=(16.8, 5.8), dpi=180)
+    fig.patch.set_facecolor("#FFFFFF")
+    fig.suptitle(
+        "3×3 투시 변환 행렬(Homography) 완전 해부 — 왜 (x, y) 뒤에 1을 붙이면 4가지 변신이 한 번에 될까?",
+        fontsize=13.5,
+        fontweight="bold",
+        color="#0F172A",
+        y=1.02,
+    )
+
+    # Panel 1: Why 2x2 cannot translate, and how appending 1 solves it
+    ax = axes[0]
+    ax.set_title("① 왜 (x, y) 뒤에 '1'을 붙일까?\n(2×2는 '더하기 이동'이 불가능!)", fontsize=10.5, fontweight="bold", color="#DC2626", pad=8)
+    ax.set_facecolor("#F8FAFC")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.axis("off")
+
+    # Top box: 2x2 limitation
+    ax.add_patch(patches.FancyBboxPatch((4, 56), 92, 38, boxstyle="round,pad=0.6,rounding_size=3", facecolor="#FEF2F2", edgecolor="#F87171", lw=1.8))
+    ax.text(50, 88, "[실패 ×] 2×2 행렬만 쓸 때", ha="center", va="center", fontsize=9.8, fontweight="bold", color="#991B1B")
+    ax.text(50, 76, "새 x = a·x + b·y", ha="center", va="center", fontsize=10.2, fontweight="bold", color="#1E293B")
+    ax.text(50, 64, "곱하기만 가능해서 '+ 50 이동'을 못함!\n(0, 0)은 무슨 짓을 해도 (0, 0)에 묶여 있음", ha="center", va="center", fontsize=8.5, color="#7F1D1D", linespacing=1.4)
+
+    # Arrow down
+    ax.annotate("", xy=(50, 44), xytext=(50, 55), arrowprops=dict(arrowstyle="-|>,head_width=0.35,head_length=0.5", color="#2563EB", lw=2.3))
+    ax.text(54, 49.5, "천재적 발상: 뒤에 '1' 추가!", ha="left", va="center", fontsize=8.4, fontweight="bold", color="#1D4ED8")
+
+    # Bottom box: (x, y, 1) trick
+    ax.add_patch(patches.FancyBboxPatch((4, 4), 92, 38, boxstyle="round,pad=0.6,rounding_size=3", facecolor="#F0FDF4", edgecolor="#4ADE80", lw=1.8))
+    ax.text(50, 36, "[성공 ○] (x, y, 1)로 1칸 늘렸을 때", ha="center", va="center", fontsize=9.8, fontweight="bold", color="#14532D")
+    ax.text(50, 24, "새 x = a·x + b·y + tx·1", ha="center", va="center", fontsize=10.2, fontweight="bold", color="#0F172A")
+    ax.text(50, 12, "tx × 1 = +tx 가 자연스럽게 생겨남!\n이제 회전·확대·이동을 곱셈 1번에 끝냄!", ha="center", va="center", fontsize=8.5, color="#166534", linespacing=1.4)
+
+    # Panel 2: Color-coded 3x3 matrix anatomy
+    ax = axes[1]
+    ax.set_title("② 3×3 행렬 9칸의 색깔별 역할 지도\n(회전·확대 + 이동 + 원근 다림질 = 8자유도)", fontsize=10.5, fontweight="bold", color="#1D4ED8", pad=8)
+    ax.set_facecolor("#F8FAFC")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.axis("off")
+
+    # Draw 3x3 cells
+    cell_specs = [
+        # (row, col, text, fill, edge, text_col)
+        (0, 0, "a", "#DBEAFE", "#2563EB", "#1E3A8A"),
+        (0, 1, "b", "#DBEAFE", "#2563EB", "#1E3A8A"),
+        (0, 2, "tx", "#FFEDD5", "#EA580C", "#9A3412"),
+        (1, 0, "d", "#DBEAFE", "#2563EB", "#1E3A8A"),
+        (1, 1, "e", "#DBEAFE", "#2563EB", "#1E3A8A"),
+        (1, 2, "ty", "#FFEDD5", "#EA580C", "#9A3412"),
+        (2, 0, "p1", "#F3E8FF", "#9333EA", "#581C87"),
+        (2, 1, "p2", "#F3E8FF", "#9333EA", "#581C87"),
+        (2, 2, "1", "#E2E8F0", "#64748B", "#334155"),
+    ]
+    x0, y0, cw, ch = 6, 44, 15, 15
+    for r, c, txt, fc, ec, tc in cell_specs:
+        cx = x0 + c * (cw + 1.5)
+        cy = y0 + (2 - r) * (ch + 1.5)
+        ax.add_patch(patches.FancyBboxPatch((cx, cy), cw, ch, boxstyle="round,pad=0.2,rounding_size=1.5", facecolor=fc, edgecolor=ec, lw=1.8))
+        ax.text(cx + cw / 2, cy + ch / 2, txt, ha="center", va="center", fontsize=11, fontweight="bold", color=tc)
+
+    ax.text(58, 67, "×", ha="center", va="center", fontsize=14, fontweight="bold", color="#334155")
+
+    # Input vector [x, y, 1]
+    for r, txt in enumerate(["x", "y", "1"]):
+        cy = y0 + (2 - r) * (ch + 1.5)
+        fc = "#FEF9C3" if r == 2 else "#FFFFFF"
+        ax.add_patch(patches.FancyBboxPatch((62, cy), 12, ch, boxstyle="round,pad=0.2,rounding_size=1.5", facecolor=fc, edgecolor="#475569", lw=1.5))
+        ax.text(68, cy + ch / 2, txt, ha="center", va="center", fontsize=10.5, fontweight="bold", color="#0F172A")
+
+    ax.text(78, 67, "=", ha="center", va="center", fontsize=14, fontweight="bold", color="#334155")
+
+    # Output vector [x', y', w']
+    for r, (txt, fc) in enumerate([("x'", "#DCFCE7"), ("y'", "#DCFCE7"), ("w'", "#F3E8FF")]):
+        cy = y0 + (2 - r) * (ch + 1.5)
+        ax.add_patch(patches.FancyBboxPatch((82, cy), 13, ch, boxstyle="round,pad=0.2,rounding_size=1.5", facecolor=fc, edgecolor="#475569", lw=1.5))
+        ax.text(88.5, cy + ch / 2, txt, ha="center", va="center", fontsize=10.5, fontweight="bold", color="#0F172A")
+
+    # Legend boxes below matrix
+    legends = [
+        (4, 29, 92, 10, "#DBEAFE", "#2563EB", "파랑 (a, b, d, e): 회전 + 확대/축소 + 기울이기"),
+        (4, 17, 92, 10, "#FFEDD5", "#EA580C", "주황 (tx, ty): '× 1'을 이용해 가로/세로 위치 이동"),
+        (4, 5, 92, 10, "#F3E8FF", "#9333EA", "보라 (p1, p2): 원근 배율 w' 계산 (회색 1은 고정 → 총 8개 미지수)"),
+    ]
+    for lx, ly, lw_b, lh_b, fc, ec, msg in legends:
+        ax.add_patch(patches.FancyBboxPatch((lx, ly), lw_b, lh_b, boxstyle="round,pad=0.2,rounding_size=1.8", facecolor=fc, edgecolor=ec, lw=1.3))
+        ax.text(lx + lw_b / 2, ly + lh_b / 2, msg, ha="center", va="center", fontsize=8.0, fontweight="bold", color="#0F172A")
+
+    # Panel 3: How dividing by w' stretches the far narrow top edge!
+    ax = axes[2]
+    ax.set_title("③ 보라 칸(w')의 마법: 원근 다림질\n(최종 좌표 = x' ÷ w',  y' ÷ w')", fontsize=10.5, fontweight="bold", color="#7C3AED", pad=8)
+    ax.set_facecolor("#F8FAFC")
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.axis("off")
+
+    # Left trapezoid (source)
+    trap = np.array([[18, 76], [34, 76], [42, 34], [10, 34], [18, 76]])
+    ax.fill(trap[:, 0], trap[:, 1], color="#EDE9FE", edgecolor="#7C3AED", lw=2.2)
+    ax.text(26, 82, "먼 윗변 (좁음)\nw' = 0.5", ha="center", va="center", fontsize=8.2, fontweight="bold", color="#6D28D9")
+    ax.text(26, 26, "가까운 아랫변\nw' = 1.0", ha="center", va="center", fontsize=8.2, fontweight="bold", color="#334155")
+
+    # Arrow with division formula
+    ax.annotate("", xy=(61, 55), xytext=(44, 55), arrowprops=dict(arrowstyle="-|>,head_width=0.35,head_length=0.5", color="#7C3AED", lw=2.5))
+    ax.text(52.5, 63, "÷ w'", ha="center", va="center", fontsize=10, fontweight="bold", color="#6D28D9")
+
+    # Right flat rectangle (destination)
+    rect_d = np.array([[63, 76], [93, 76], [93, 34], [63, 34], [63, 76]])
+    ax.fill(rect_d[:, 0], rect_d[:, 1], color="#DCFCE7", edgecolor="#16A34A", lw=2.2)
+    ax.text(78, 82, "÷ 0.5 → 2배 쫙 펴짐!", ha="center", va="center", fontsize=8.4, fontweight="bold", color="#15803D")
+    ax.text(78, 26, "÷ 1.0 → 크기 유지!", ha="center", va="center", fontsize=8.4, fontweight="bold", color="#15803D")
+
+    ax.add_patch(patches.FancyBboxPatch((4, 4), 92, 15, boxstyle="round,pad=0.3,rounding_size=2", facecolor="#FFFBEB", edgecolor="#F59E0B", lw=1.5))
+    ax.text(
+        50,
+        11.5,
+        "먼 곳은 w'가 작아서 나눌수록 크게 늘어나고,\n가까운 곳은 w'가 1이라 그대로 → 사다리꼴이 직사각형으로!",
+        ha="center",
+        va="center",
+        fontsize=8.3,
+        fontweight="bold",
+        color="#78350F",
+        linespacing=1.4,
+    )
+
+    out = DIAGRAMS_DIR / "09_homography_3x3_matrix_anatomy.png"
+    fig.tight_layout()
+    fig.savefig(out, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    return out
+
+
 def main() -> None:
     configure_utf8_console()
     _setup_korean_font()
@@ -877,6 +1012,7 @@ def main() -> None:
         generate_06_contour_approx_guide(),
         generate_07_stage4_perspective_guide(),
         generate_08_stage5_adaptive_guide(),
+        generate_09_homography_3x3_anatomy(),
     ]
     for path in outputs:
         print(f"[OK] Generated diagram: {path.relative_to(PROJECT_ROOT)}")
